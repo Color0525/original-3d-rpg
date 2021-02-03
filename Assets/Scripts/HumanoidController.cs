@@ -41,7 +41,7 @@ public class HumanoidController : MonoBehaviour
 
         transform.position = SceneController.m_Instance.m_playerMapPosition;
         transform.rotation = SceneController.m_Instance.m_playerMapRotation;
-        FindObjectOfType<EnemyGenerater>().GenerateEnemy();
+        //FindObjectOfType<EnemyGenerater>().GenerateEnemy();
     }
 
     void Update()

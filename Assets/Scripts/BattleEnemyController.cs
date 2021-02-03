@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class BattleEnemyController : BattleUnitControllerBase
 {
+    void Start()
+    {
+        
+    }
+
     /// <summary>
     /// 行動(敵)
     /// </summary>

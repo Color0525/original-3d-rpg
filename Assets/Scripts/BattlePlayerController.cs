@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BattlePlayerController : BattleUnitControllerBase
 {
+    void Start()
+    {
+        
+    }
+
     /// <summary>
     /// 行動開始(味方)
     /// </summary>

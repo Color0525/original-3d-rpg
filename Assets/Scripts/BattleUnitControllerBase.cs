@@ -16,6 +16,8 @@ public class BattleUnitControllerBase : MonoBehaviour
 //        icon.transform.SetParent(this.transform);
 //    }
 
+
+
     /// <summary>
     /// 行動開始
     /// </summary>

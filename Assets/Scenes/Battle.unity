@@ -589,7 +589,7 @@ MonoBehaviour:
   m_playerBattlePosition: {fileID: 1291584367}
   m_enemyBattlePosition: {fileID: 1078969167}
   m_playerPrefabs:
-  - {fileID: 2532421167017355989, guid: 14677fcfeaa40a64987482667f84fcd8, type: 3}
+  - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
   m_enemyPrefabs:
   - {fileID: 2192296121145297258, guid: 3cd335b9130b9534bb3feee83a80c89f, type: 3}
   m_playerUnits: []
