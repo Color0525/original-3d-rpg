@@ -1,12 +1,24 @@
-﻿using System.Collections;
+﻿using FUnit.GameObjectExtensions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BattlePlayerController : BattleUnitControllerBase
+/// <summary>
+/// 味方戦闘時の行動
+/// </summary>
+public class BattlePlayerController : BattleStatusControllerBase
 {
-    void Start()
+    [SerializeField] GameObject m_statusIconPrefab;
+
+    /// <summary>
+    /// PlayerのStatusIconを生成
+    /// </summary>
+    public override void Start()
     {
-        
+        base.Start();
+        GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
+        m_HPBarSlider = go.transform.Find("HPBar").GetComponent<Slider>();
     }
 
     /// <summary>
@@ -32,8 +44,7 @@ public class BattlePlayerController : BattleUnitControllerBase
     /// </summary>
     public void AttackCommand()
     {
-        BattleStatusController target = GameObject.FindObjectOfType<BattleEnemyController>().GetComponent<BattleStatusController>();
-        GetComponent<BattleStatusController>().Attack(target);
+        Attack(FindObjectOfType<BattleEnemyController>());
         EndAction();
     }
 

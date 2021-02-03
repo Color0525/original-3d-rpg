@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// シーンを管理
+/// </summary>
 public class SceneController : MonoBehaviour
 {
     /// <summary>
-    /// SceneController(唯一)
+    /// シーン唯一のSceneController
     /// </summary>
     public static SceneController m_Instance { get; private set; }
 

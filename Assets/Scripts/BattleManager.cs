@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 戦闘全体を管理
+/// </summary>
 public class BattleManager : MonoBehaviour
 {
     /// <summary>
@@ -80,10 +83,11 @@ public class BattleManager : MonoBehaviour
         {
             case State.StartTurn:
                 //現在ユニット行動開始
-                m_allUnits[m_nowNum].GetComponent<BattleUnitControllerBase>().StartAction();
+                m_allUnits[m_nowNum].GetComponent<BattleStatusControllerBase>().StartAction();
                 break;
 
             case State.ActingTurn:
+                //行動中
                 break;
 
             case State.EndTurn:
@@ -140,7 +144,7 @@ public class BattleManager : MonoBehaviour
     public void StartCommandSelect(BattlePlayerController actor)
     {
         m_CommandWindow.SetActive(true);
-        m_CommandWindow.GetComponent<PlayCommandController>().m_actor = actor;
+        m_CommandWindow.GetComponent<PlayerCommandController>().m_actor = actor;
     }
 
     /// <summary>
@@ -148,7 +152,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndCommandSelect()
     {
-        m_CommandWindow.GetComponent<PlayCommandController>().m_actor = null;
+        m_CommandWindow.GetComponent<PlayerCommandController>().m_actor = null;
         m_CommandWindow.SetActive(false);
     }
 

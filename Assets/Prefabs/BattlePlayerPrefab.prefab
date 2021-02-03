@@ -462,10 +462,9 @@ GameObject:
   - component: {fileID: 6668329273349714803}
   - component: {fileID: 8862005868239188243}
   - component: {fileID: 8862005868239188240}
-  - component: {fileID: 8862005868239188241}
   - component: {fileID: 8862005868239188246}
   m_Layer: 0
-  m_Name: 01_kohaku_A (1)
+  m_Name: BattlePlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,20 +535,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8862005868239188241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6668329273356992691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9313498455565c64cae56ae2f92beeb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_nowLife: 10
-  m_power: 3
 --- !u!114 &8862005868239188246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +547,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475f2ce24c36e32419199dc4132b0d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxLife: 10
+  m_currentLife: 10
+  m_power: 3
+  m_HPBarSlider: {fileID: 0}
+  m_statusIconPrefab: {fileID: 8737785771190363022, guid: 97d236ecabac3eb4195dac2e24b25feb,
+    type: 3}
 --- !u!1 &6668329273356992693
 GameObject:
   m_ObjectHideFlags: 0

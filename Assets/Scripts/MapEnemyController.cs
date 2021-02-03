@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// マップ敵の行動
+/// </summary>
 public class MapEnemyController : MonoBehaviour
 {
     /// <summary>動く速さ</summary>

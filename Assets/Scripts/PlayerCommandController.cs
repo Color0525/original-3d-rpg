@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayCommandController : MonoBehaviour
+/// <summary>
+/// 味方の戦闘コマンドを管理
+/// </summary>
+public class PlayerCommandController : MonoBehaviour
 {
     /// <summary>
     /// 行動者
