@@ -7,8 +7,13 @@ using UnityEngine;
 /// 入力を受け取り、それに従ってオブジェクトをメインカメラと相対的な方向に動かす。
 /// </summary>
 [RequireComponent(typeof(Rigidbody), typeof(Animator))]
-public class HumanoidController : MonoBehaviour
+public class MapPlayerController : MonoBehaviour
 {
+    /// <summary>
+    /// 接触時戦うPlayerPrefab
+    /// </summary>
+    public GameObject[] m_battlePlayerPrefabs;
+
     /// <summary>動く速さ</summary>
     [SerializeField] float m_movingSpeed = 5f;
     /// <summary>ターンの速さ</summary>

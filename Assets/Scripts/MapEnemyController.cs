@@ -8,6 +8,11 @@ using UnityEngine.AI;
 /// </summary>
 public class MapEnemyController : MonoBehaviour
 {
+    /// <summary>
+    /// 接触時戦うEnemyPrefab
+    /// </summary>
+    public GameObject[] m_battleEnemyPrefabs;
+
     /// <summary>動く速さ</summary>
     [SerializeField] float m_movingSpeed = 5f;
     /// <summary>ターンの速さ</summary>
@@ -131,8 +136,8 @@ public class MapEnemyController : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             SceneController.m_Instance.LoadBattleScene(
-                collision.gameObject.GetComponent<MapPlayerInformation>().m_playerPrefabs,
-                gameObject.GetComponent<MapEnemyInformation>().m_enemyPrefabs,
+                collision.gameObject.GetComponent<MapPlayerController>().m_battlePlayerPrefabs,
+                gameObject.GetComponent<MapEnemyController>().m_battleEnemyPrefabs,
                 collision.gameObject.transform.position,
                 collision.gameObject.transform.rotation);
         }

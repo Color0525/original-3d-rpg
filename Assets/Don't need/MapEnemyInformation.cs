@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public class MapEnemyInformation : MonoBehaviour
 {
-    public GameObject[] m_enemyPrefabs;
+    public GameObject[] m_battleEnemyPrefabs;
 }

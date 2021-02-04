@@ -6142,7 +6142,6 @@ GameObject:
   - component: {fileID: 4794019544614945755}
   - component: {fileID: 4794019544614945757}
   - component: {fileID: 4794019544614945759}
-  - component: {fileID: 4794019544614945729}
   m_Layer: 0
   m_Name: MapPlayerPrehab
   m_TagString: Player
@@ -6224,28 +6223,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4794019544614945728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bcf823dc364fc043afcc536c6f7eda7, type: 3}
+  m_Script: {fileID: 11500000, guid: 78de938a7ff36c04396de5f4340276ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_battlePlayerPrefabs:
+  - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
   m_movingSpeed: 5
   m_turnSpeed: 10
   m_jumpPower: 5
   m_isGroundedLength: 0.1
   m_attackTrigger: {fileID: 0}
---- !u!114 &4794019544614945729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794019544614945728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cd0942239c5e4d4bba7fb7972622a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerPrefabs:
-  - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
 --- !u!1 &4794019544614945730
 GameObject:
   m_ObjectHideFlags: 0

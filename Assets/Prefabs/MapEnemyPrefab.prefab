@@ -66,20 +66,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7678608091234198919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6202670154728139183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f07bfcb0954661c45829e8d268464fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_enemyPrefabs:
-  - {fileID: 2192296121145297258, guid: 3cd335b9130b9534bb3feee83a80c89f, type: 3}
 --- !u!114 &8638922363871571585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f65abdd347c99249ab1fe848164902c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_battleEnemyPrefabs:
+  - {fileID: 2192296121145297258, guid: 3cd335b9130b9534bb3feee83a80c89f, type: 3}
   m_movingSpeed: 3
   m_turnSpeed: 3
   m_discoverCollider: {fileID: 160562551}

@@ -44,7 +44,7 @@ public class SceneController : MonoBehaviour
     /// <param name="playerMapRotate"></param>
     public void LoadBattleScene(GameObject[] playerPrefabs, GameObject[] enemyPrefabs, Vector3 playerMapPos, Quaternion playerMapRotate)
     {
-        foreach (var player in FindObjectsOfType<HumanoidController>())
+        foreach (var player in FindObjectsOfType<MapPlayerController>())
         {
             player.StopControl();
         }

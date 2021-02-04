@@ -13,20 +13,20 @@ public class BattleStatusControllerBase : MonoBehaviour
     [SerializeField] int m_power = 3;
     public Slider m_HPBarSlider;
 
-    BattleManager m_bm;
+    public static BattleManager m_bm;
 
-    public virtual void Start()
+    void Awake()
     {
         m_bm = FindObjectOfType<BattleManager>();
     }
 
-    private void Update()
-    {
-        if (m_bm == null)
-        {
-            Debug.Log(m_bm);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (m_bm == null)
+    //    {
+    //        Debug.Log(m_bm);
+    //    }
+    //}
 
     /// <summary>
     /// 攻撃する
@@ -60,7 +60,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     public virtual void StartAction()
     {
         //m_bm = FindObjectOfType<BattleManager>();
-
+        //Debug.Log(m_bm);
         m_bm.StartActingTurn();
     }
 

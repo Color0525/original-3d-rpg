@@ -112,6 +112,7 @@ public class BattleManager : MonoBehaviour
                 //戦闘後Mapシーンへ
                 if (Input.anyKeyDown)
                 {
+                    Debug.Log(SceneController.m_Instance);
                     SceneController.m_Instance.LoadMapScene();
                 }
                 break;

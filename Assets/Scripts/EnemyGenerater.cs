@@ -30,9 +30,9 @@ public class EnemyGenerater : MonoBehaviour
 
     void Update() 
     {
-        if (FindObjectOfType<HumanoidController>() && !m_generated)
+        if (FindObjectOfType<MapPlayerController>() && !m_generated)
         {
-            Vector3 playerPos = FindObjectOfType<HumanoidController>().transform.position;
+            Vector3 playerPos = FindObjectOfType<MapPlayerController>().transform.position;
             for (int i = 0; i < m_instanceNum; i++)
             {
                 float randomX = Random.Range(this.transform.position.x - m_generateRange, this.transform.position.x + m_generateRange);
