@@ -14,9 +14,8 @@ public class BattlePlayerController : BattleStatusControllerBase
     /// <summary>
     /// PlayerのStatusIconを生成
     /// </summary>
-    public override void Start()
+    public void Start()
     {
-        base.Start();
         GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
         m_HPBarSlider = go.transform.Find("HPBar").GetComponent<Slider>();
     }
@@ -27,7 +26,7 @@ public class BattlePlayerController : BattleStatusControllerBase
     public override void StartAction()
     {
         base.StartAction();
-        FindObjectOfType<BattleManager>().StartCommandSelect(this);
+        m_bm.StartCommandSelect(this);
     }
 
     /// <summary>
@@ -36,7 +35,7 @@ public class BattlePlayerController : BattleStatusControllerBase
     public override void EndAction()
     {
         base.EndAction();
-        FindObjectOfType<BattleManager>().EndCommandSelect();
+        m_bm.EndCommandSelect();
     }
 
     /// <summary>
