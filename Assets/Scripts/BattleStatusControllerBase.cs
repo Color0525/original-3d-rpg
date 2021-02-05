@@ -44,13 +44,22 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// <param name="power"></param>
     void Damage(int power)
     {
-        m_currentLife = Mathf.Max(m_currentLife - power, 0);
+        SetLife(-power);
         Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentLife}");
         if (m_currentLife == 0)
         {
             Debug.Log(this.gameObject.name + " Dead");
             m_bm.DeleteUnitsList(this.gameObject);
         }
+    }
+
+    /// <summary>
+    /// Lifeを更新
+    /// </summary>
+    /// <param name="value"></param>
+    void SetLife(int value)
+    {
+        m_currentLife = Mathf.Max(m_currentLife + value, 0);
         m_HPBarSlider.value = (float)m_currentLife / (float)m_maxLife;
     }
 

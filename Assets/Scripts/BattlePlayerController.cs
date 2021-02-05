@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class BattlePlayerController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_statusIconPrefab;
+    Animator m_anim;
 
     /// <summary>
     /// PlayerのStatusIconを生成
@@ -18,6 +19,8 @@ public class BattlePlayerController : BattleStatusControllerBase
     {
         GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
         m_HPBarSlider = go.transform.Find("HPBar").GetComponent<Slider>();
+
+        m_anim = GetComponent<Animator>();
     }
 
     /// <summary>
@@ -43,6 +46,7 @@ public class BattlePlayerController : BattleStatusControllerBase
     /// </summary>
     public void AttackCommand()
     {
+        m_anim.SetTrigger("Attack");
         Attack(FindObjectOfType<BattleEnemyController>());
         EndAction();
     }

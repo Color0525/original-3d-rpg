@@ -46,7 +46,6 @@ public class MapPlayerController : MonoBehaviour
 
         transform.position = SceneController.m_Instance.m_playerMapPosition;
         transform.rotation = SceneController.m_Instance.m_playerMapRotation;
-        //FindObjectOfType<EnemyGenerater>().GenerateEnemy();
     }
 
     void Update()
@@ -83,11 +82,14 @@ public class MapPlayerController : MonoBehaviour
             m_rb.velocity = velo;   // 計算した速度ベクトルをセットする
         }
 
-        // ジャンプの入力を取得し、接地している時に押されていたらジャンプする
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (m_jumpPower > 0)
         {
-            m_rb.AddForce(Vector3.up * m_jumpPower, ForceMode.Impulse);
-            m_anim.SetTrigger("Jump");
+            // ジャンプの入力を取得し、接地している時に押されていたらジャンプする
+            if (Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                m_rb.AddForce(Vector3.up * m_jumpPower, ForceMode.Impulse);
+                m_anim.SetTrigger("Jump");
+            }
         }
 
         if (m_attackTrigger)

@@ -6230,7 +6230,7 @@ MonoBehaviour:
   - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
   m_movingSpeed: 5
   m_turnSpeed: 10
-  m_jumpPower: 5
+  m_jumpPower: 0
   m_isGroundedLength: 0.1
   m_attackTrigger: {fileID: 0}
 --- !u!1 &4794019544614945730
