@@ -15,7 +15,7 @@ public class BattlePlayerController : BattleStatusControllerBase
     /// <summary>
     /// PlayerのStatusIconを生成
     /// </summary>
-    public void Start()
+    void Start()
     {
         GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
         m_HPBarSlider = go.transform.Find("HPBar").GetComponent<Slider>();

@@ -20,14 +20,6 @@ public class BattleStatusControllerBase : MonoBehaviour
         m_bm = FindObjectOfType<BattleManager>();
     }
 
-    //private void Update()
-    //{
-    //    if (m_bm == null)
-    //    {
-    //        Debug.Log(m_bm);
-    //    }
-    //}
-
     /// <summary>
     /// 攻撃する
     /// </summary>
@@ -44,7 +36,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// <param name="power"></param>
     void Damage(int power)
     {
-        SetLife(-power);
+        LifeUpdate(-power);
         Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentLife}");
         if (m_currentLife == 0)
         {
@@ -57,7 +49,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// Lifeを更新
     /// </summary>
     /// <param name="value"></param>
-    void SetLife(int value)
+    void LifeUpdate(int value = 0)
     {
         m_currentLife = Mathf.Max(m_currentLife + value, 0);
         m_HPBarSlider.value = (float)m_currentLife / (float)m_maxLife;
@@ -68,8 +60,6 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// </summary>
     public virtual void StartAction()
     {
-        //m_bm = FindObjectOfType<BattleManager>();
-        //Debug.Log(m_bm);
         m_bm.StartActingTurn();
     }
 

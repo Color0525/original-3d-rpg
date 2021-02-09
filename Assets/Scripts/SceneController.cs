@@ -14,14 +14,14 @@ public class SceneController : MonoBehaviour
     public static SceneController m_Instance { get; private set; }
 
     //BattleScene移行用戦闘キャラ情報
-    public GameObject[] m_playerPrefabs;
-    public GameObject[] m_enemyPrefabs;
+    public GameObject[] m_PlayerPrefabs { get; private set; }
+    public GameObject[] m_EnemyPrefabs { get; private set; }
 
     //MapScene移行用Player情報
-    public Vector3 m_playerMapPosition = Vector3.zero;
-    public Quaternion m_playerMapRotation = Quaternion.identity;
-    
-    void Awake()
+    public Vector3 m_PlayerMapPosition { get; private set; }
+    public Quaternion m_PlayerMapRotation { get; private set; }
+
+void Awake()
     {
         //シーンをまたぐSceneControllerを唯一にする
         if (m_Instance != null)
@@ -53,11 +53,11 @@ public class SceneController : MonoBehaviour
             enemy.StopControl();
         }
 
-        m_playerPrefabs = playerPrefabs;
-        m_enemyPrefabs = enemyPrefabs;
+        m_PlayerPrefabs = playerPrefabs;
+        m_EnemyPrefabs = enemyPrefabs;
 
-        m_playerMapPosition = playerMapPos;
-        m_playerMapRotation = playerMapRotate;
+        m_PlayerMapPosition = playerMapPos;
+        m_PlayerMapRotation = playerMapRotate;
 
         SceneManager.LoadScene("Battle");
         //StartCoroutine(LoadScene("Battle"));

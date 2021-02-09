@@ -137,7 +137,7 @@ public class MapEnemyController : MonoBehaviour
         {
             SceneController.m_Instance.LoadBattleScene(
                 collision.gameObject.GetComponent<MapPlayerController>().m_battlePlayerPrefabs,
-                gameObject.GetComponent<MapEnemyController>().m_battleEnemyPrefabs,
+                m_battleEnemyPrefabs,
                 collision.gameObject.transform.position,
                 collision.gameObject.transform.rotation);
         }

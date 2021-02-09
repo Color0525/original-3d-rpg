@@ -751,8 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2c9844ef5029d41a10122527d71502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerPrefabs: []
-  m_enemyPrefabs: []
   m_playerMapPosition: {x: 0, y: -2.5, z: 0}
   m_playerMapRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1238944647

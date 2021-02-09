@@ -19,11 +19,11 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     ///戦うプレイヤー
     /// </summary>
-    public GameObject[] m_playerPrefabs;
+    [SerializeField] GameObject[] m_playerPrefabs;
     /// <summary>
     /// 戦うエネミー
     /// </summary>
-    public GameObject[] m_enemyPrefabs;
+    [SerializeField] GameObject[] m_enemyPrefabs;
 
     [SerializeField] List<GameObject> m_playerUnits = new List<GameObject>();
     [SerializeField] List<GameObject> m_enemyUnits = new List<GameObject>();
@@ -49,15 +49,15 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ///SceneControllerからユニット情報を取得
+        //SceneControllerからユニット情報を取得
         SceneController sc = SceneController.m_Instance;
-        if (sc.m_playerPrefabs.Length > 0)
+        if (sc.m_PlayerPrefabs != null)
         {
-            m_playerPrefabs = sc.m_playerPrefabs;
+            m_playerPrefabs = sc.m_PlayerPrefabs;
         }
-        if (sc.m_enemyPrefabs.Length > 0)
+        if (sc.m_EnemyPrefabs != null)
         {
-            m_enemyPrefabs = sc.m_enemyPrefabs;
+            m_enemyPrefabs = sc.m_EnemyPrefabs;
         }
 
         //ユニットをインスタンスしてListにAdd
