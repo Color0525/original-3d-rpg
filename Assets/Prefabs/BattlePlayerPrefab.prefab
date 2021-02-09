@@ -547,10 +547,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475f2ce24c36e32419199dc4132b0d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxLife: 10
-  m_currentLife: 10
+  m_name: "\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093"
+  m_maxHP: 10
+  m_currentHP: 10
+  m_maxSP: 10
+  m_currentSP: 10
   m_power: 3
-  m_HPBarSlider: {fileID: 0}
+  m_statusIcon: {fileID: 0}
   m_statusIconPrefab: {fileID: 8737785771190363022, guid: 97d236ecabac3eb4195dac2e24b25feb,
     type: 3}
 --- !u!1 &6668329273356992693

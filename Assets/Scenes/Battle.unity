@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.34117648}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.19607843}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -591,7 +591,7 @@ MonoBehaviour:
   m_playerPrefabs:
   - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
   m_enemyPrefabs:
-  - {fileID: 2192296121145297258, guid: 3cd335b9130b9534bb3feee83a80c89f, type: 3}
+  - {fileID: 4783978744820338617, guid: 616a3e463f8e6c947a64599bc22e5283, type: 3}
   m_playerUnits: []
   m_enemyUnits: []
   m_allUnits: []
@@ -702,7 +702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078969166}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.5, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1951479717}
@@ -751,8 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2c9844ef5029d41a10122527d71502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerMapPosition: {x: 0, y: -2.5, z: 0}
-  m_playerMapRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1238944647
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,15 +12,19 @@ public class BattlePlayerController : BattleStatusControllerBase
     [SerializeField] GameObject m_statusIconPrefab;
     Animator m_anim;
 
+    void Start()
+    {
+        m_anim = GetComponent<Animator>();
+    }
+
     /// <summary>
     /// PlayerのStatusIconを生成
     /// </summary>
-    void Start()
+    public override void SetupAwake()
     {
         GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
-        m_HPBarSlider = go.transform.Find("HPBar").GetComponent<Slider>();
-
-        m_anim = GetComponent<Animator>();
+        m_statusIcon = go.GetComponent<StatusIconController>();
+        base.SetupAwake();
     }
 
     /// <summary>

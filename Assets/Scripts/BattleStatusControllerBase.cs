@@ -8,16 +8,29 @@ using UnityEngine.UI;
 /// </summary>
 public class BattleStatusControllerBase : MonoBehaviour
 {
-    [SerializeField] int m_maxLife = 10;
-    [SerializeField] int m_currentLife = 10;
+    [SerializeField] string m_name = null;
+    [SerializeField] int m_maxHP = 10;
+    [SerializeField] int m_currentHP = 10;
+    [SerializeField] int m_maxSP = 0;
+    [SerializeField] int m_currentSP = 0;
     [SerializeField] int m_power = 3;
-    public Slider m_HPBarSlider;
+
+    public StatusIconController m_statusIcon;
 
     public static BattleManager m_bm;
 
     void Awake()
     {
         m_bm = FindObjectOfType<BattleManager>();
+        SetupAwake();
+    }
+
+    /// <summary>
+    /// Awake時の処理(StatusIconをセット)
+    /// </summary>
+    public virtual void SetupAwake()
+    {
+        m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
     }
 
     /// <summary>
@@ -36,9 +49,9 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// <param name="power"></param>
     void Damage(int power)
     {
-        LifeUpdate(-power);
-        Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentLife}");
-        if (m_currentLife == 0)
+        UpdateHP(-power);
+        Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentHP}");
+        if (m_currentHP == 0)
         {
             Debug.Log(this.gameObject.name + " Dead");
             m_bm.DeleteUnitsList(this.gameObject);
@@ -46,13 +59,13 @@ public class BattleStatusControllerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// Lifeを更新
+    /// HPを更新
     /// </summary>
     /// <param name="value"></param>
-    void LifeUpdate(int value = 0)
+    void UpdateHP(int value = 0)
     {
-        m_currentLife = Mathf.Max(m_currentLife + value, 0);
-        m_HPBarSlider.value = (float)m_currentLife / (float)m_maxLife;
+        m_currentHP = Mathf.Max(m_currentHP + value, 0);
+        m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
     }
 
     /// <summary>
