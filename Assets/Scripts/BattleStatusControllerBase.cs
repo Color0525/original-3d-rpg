@@ -13,36 +13,67 @@ public class BattleStatusControllerBase : MonoBehaviour
     [SerializeField] int m_maxSP = 0;
     [SerializeField] int m_currentSP = 0;
     [SerializeField] int m_power = 3;
-
     public StatusIconController m_statusIcon;
 
-    public static BattleManager m_bm;
+    //Skill[] m_skills;
+    //Slill m_currentSkill;
+    Animator m_anim;
+    [SerializeField] AnimationClip m_ac;
+
+    public static BattleManager m_battleManager;
+
+    private void Awake()//StartBattle前のstate実装後Start()に戻す
+    {
+        m_battleManager = FindObjectOfType<BattleManager>();
+        m_anim = GetComponent<Animator>();
+    }
 
     void Start()
     {
-        m_bm = FindObjectOfType<BattleManager>();
+        //m_BattleManager = FindObjectOfType<BattleManager>();
         m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
-        //SetupAwake();
     }
 
-    ///// <summary>
-    ///// Awake時の処理(StatusIconをセット)
-    ///// </summary>
-    //public virtual void SetupAwake()
-    //{
-    //    m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
-    //}
+    /// <summary>
+    /// 行動開始
+    /// </summary>
+    public virtual void StartAction()
+    {
+        m_battleManager.StartActingTurn();
+    }
+    /// <summary>
+    /// 行動終了
+    /// </summary>
+    void EndAction()
+    {
+        m_battleManager.EndActingTurn();
+    }
 
     /// <summary>
-    /// 攻撃する
+    /// AnimatorのSetTriggerをセット（Animationにする？）
+    /// </summary>
+    /// <param name="animName"></param>
+    public void SetTriggerAnimator(string animName)
+    {
+        m_anim.SetTrigger(animName);
+    }
+    public virtual void Hit()/// Attackアニメイベント 
+    {
+        Debug.Log(this.gameObject.name + " Attack");
+    }
+    void End()
+    {
+        EndAction();
+    }
+
+    /// <summary>
+    /// ダメージを与える
     /// </summary>
     /// <param name="target"></param>
     public void Attack(BattleStatusControllerBase target)
     {
-        Debug.Log(this.gameObject.name + " Attack");
         target.Damage(m_power);
     }
-
     /// <summary>
     /// ダメージを受ける
     /// </summary>
@@ -50,14 +81,18 @@ public class BattleStatusControllerBase : MonoBehaviour
     void Damage(int power)
     {
         UpdateHP(-power);
-        Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentHP}");
         if (m_currentHP == 0)
         {
             Debug.Log(this.gameObject.name + " Dead");
-            m_bm.DeleteUnitsList(this.gameObject);
+            m_anim.SetBool("Death", true);
+            m_battleManager.DeleteUnitsList(this.gameObject);
+        }
+        else
+        {
+            Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentHP}");
+            m_anim.SetTrigger("GetHit");
         }
     }
-
     /// <summary>
     /// HPを更新
     /// </summary>
@@ -66,21 +101,5 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         m_currentHP = Mathf.Max(m_currentHP + value, 0);
         m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
-    }
-
-    /// <summary>
-    /// 行動開始
-    /// </summary>
-    public virtual void StartAction()
-    {
-        m_bm.StartActingTurn();
-    }
-
-    /// <summary>
-    /// 行動終了
-    /// </summary>
-    public void EndAction()
-    {
-        m_bm.EndActingTurn();
     }
 }

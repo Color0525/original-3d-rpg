@@ -13,7 +13,24 @@ public class BattleEnemyController : BattleStatusControllerBase
     public override void StartAction()
     {
         base.StartAction();
-        Attack(FindObjectOfType<BattlePlayerController>());
-        EndAction();
+        EnemyAction();
+    }
+
+    /// <summary>
+    /// 行動(Enemy)
+    /// </summary>
+    void EnemyAction()
+    {
+        //m_currentSkill = Random.Range(m_skills);
+        SetTriggerAnimator("Attack");//(m_currentSkill.m_animation.neme)
+    }
+
+    /// <summary>
+    /// アニメイベントAttack()
+    /// </summary>
+    public override void Hit()
+    {
+        base.Hit();
+        Attack(FindObjectOfType<BattlePlayerController>());//(BEC, m_currentSkill.m_power)
     }
 }

@@ -19,7 +19,7 @@ public class PlayerCommandController : MonoBehaviour
     /// </summary>
     public void PlayCommand()
     {
-        m_actor.ActionCommand();//(m_skill);
+        m_actor.PlayerActionCommand();//(m_skill);
     }
 
 }

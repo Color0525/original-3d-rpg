@@ -7,51 +7,31 @@ using UnityEngine;
 /// </summary>
 public class BattlePlayerController : BattleStatusControllerBase
 {
-    //[SerializeField] GameObject m_statusIconPrefab;
-
-    Animator m_anim;
-
-    void Start()
-    {
-        m_anim = GetComponent<Animator>();
-    }
-
-    ///// <summary>
-    ///// PlayerのStatusIconを生成
-    ///// </summary>
-    //public override void SetupAwake()
-    //{
-    //    GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
-    //    m_statusIcon = go.GetComponent<StatusIconController>();
-    //    m_bm.SetupStatusIcon();
-    //    base.SetupAwake();
-    //}
-
     /// <summary>
     /// 行動開始(味方)
     /// </summary>
     public override void StartAction()
     {
         base.StartAction();
-        m_bm.StartCommandSelect(this);
+        m_battleManager.StartCommandSelect(this);
     }
 
     /// <summary>
-    /// 攻撃スキル
+    /// 行動コマンド(Player)
     /// </summary>
-    public void ActionCommand()//(Skill skill)
+    public void PlayerActionCommand()//(Skill skill)
     {
-        m_anim.SetTrigger("Attack");
-        m_bm.EndCommandSelect();
+        m_battleManager.EndCommandSelect();
+        //m_currentSkill = skill;
+        SetTriggerAnimator("Attack");//(m_currentSkill.m_animation.neme)
     }
 
-    /// Attackアニメーションイベント
-    void HitAttack()
+    /// <summary>
+    /// アニメイベントAttack()
+    /// </summary>
+    public override void Hit()
     {
-        Attack(FindObjectOfType<BattleEnemyController>());
-    }
-    void EndAttack()
-    {
-        EndAction();
+        base.Hit();
+        Attack(FindObjectOfType<BattleEnemyController>());//(BEC, m_currentSkill.m_power)
     }
 }

@@ -14,7 +14,9 @@ public class MapEnemyController : MonoBehaviour
     public GameObject[] m_battleEnemyPrefabs;
 
     /// <summary>動く速さ</summary>
-    [SerializeField] float m_movingSpeed = 5f;
+    [SerializeField] float m_movingSpeed = 3f;
+    /// <summary>追尾時の動く速さ</summary>
+    [SerializeField] float m_chaseMovingSpeed = 5f;
     /// <summary>ターンの速さ</summary>
     [SerializeField] float m_turnSpeed = 3f;
 
@@ -38,21 +40,25 @@ public class MapEnemyController : MonoBehaviour
     Vector3 m_dir = Vector3.zero;
     Rigidbody m_rb;
     NavMeshAgent m_nma;
+    Animator m_anim;
 
-    /// <summary>
-    /// 制御状態
-    /// </summary>
-    bool m_stop = false;
     /// <summary>
     /// 追尾状態
     /// </summary>
     bool m_chase = false;
+    /// <summary>
+    /// 制御状態
+    /// </summary>
+    bool m_stop = false;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
         m_nma = GetComponent<NavMeshAgent>();
+        m_nma.speed = m_chaseMovingSpeed;
+        m_anim = GetComponent<Animator>();
         m_discoverCollider.radius = m_discoverDis;
         StartCoroutine(SetMoveDir(m_maxMoveTime, m_maxStopTime));
     }
@@ -85,12 +91,29 @@ public class MapEnemyController : MonoBehaviour
             m_rb.velocity = velo;   // 計算した速度ベクトルをセットする
         }
     }
+    void LateUpdate()
+    {
+        if (m_stop)
+        {
+            return;
+        }
+        if (m_chase)
+        {
+            return;
+        }
+
+        // 水平方向の速度を求めて Animator Controller のパラメーターに渡す
+        Vector3 horizontalVelocity = m_rb.velocity;
+        horizontalVelocity.y = 0;
+        m_anim.SetFloat("Speed", horizontalVelocity.magnitude);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             m_chase = true;
+            m_anim.SetBool("Chase", true);
         }
     }
 
@@ -124,6 +147,7 @@ public class MapEnemyController : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             m_chase = false;
+            m_anim.SetBool("Chase", false);
         }
     }
 
