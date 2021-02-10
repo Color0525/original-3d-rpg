@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 /// </summary>
 public class StatusIconController : MonoBehaviour
 {
-    [SerializeField] Text m_name;
+    [SerializeField] TextMeshProUGUI m_name;
     [SerializeField] Slider m_HPBar;
     [SerializeField] Slider m_SPBar;
 
@@ -22,14 +23,14 @@ public class StatusIconController : MonoBehaviour
     /// <param name="currentSP"></param>
     public void SetupStatus(string name, int maxHP, int currentHP, int maxSP, int currentSP)
     {
-        if (name != null)
-        {
+        //if (name != null)
+        //{
             m_name.text = name;
-        }
-        else
-        {
-            m_name.gameObject.SetActive(false);
-        }
+        //}
+        //else
+        //{
+        //    m_name.gameObject.SetActive(false);
+        //}
 
         UpdateHPBar(maxHP, currentHP);
 

@@ -12,7 +12,10 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     [SerializeField] State m_state = State.StartTurn;
 
-    [SerializeField] GameObject m_CommandWindow;
+    [SerializeField] GameObject m_statusPanel;
+    [SerializeField] GameObject m_statusIconPrefab;
+    [SerializeField] GameObject m_commandWindow;
+    [SerializeField] GameObject m_commandButtonPrefab;
     [SerializeField] Transform m_playerBattlePosition;
     [SerializeField] Transform m_enemyBattlePosition;
 
@@ -64,6 +67,11 @@ public class BattleManager : MonoBehaviour
         foreach (var unit in m_playerPrefabs)
         {
             GameObject player = Instantiate(unit, m_playerBattlePosition.position, m_playerBattlePosition.rotation);
+
+            //statusIconをセット
+            GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
+            player.GetComponent<BattlePlayerController>().m_statusIcon = statusIcon.GetComponent<StatusIconController>();
+
             m_playerUnits.Add(player);
             m_allUnits.Add(player);
         }
@@ -142,10 +150,16 @@ public class BattleManager : MonoBehaviour
     /// コマンドセレクトを開始する
     /// </summary>
     /// <param name="actor"></param>
-    public void StartCommandSelect(BattlePlayerController actor)
+    public void StartCommandSelect(BattlePlayerController actor)//(Skill[] skills, BPC bpc)
     {
-        m_CommandWindow.SetActive(true);
-        m_CommandWindow.GetComponent<PlayerCommandController>().m_actor = actor;
+        m_commandWindow.SetActive(true);
+        //foreach (var skill in skills)
+        //{
+            GameObject go = Instantiate(m_commandButtonPrefab, m_commandWindow.transform);
+            PlayerCommandController pcc = go.GetComponent<PlayerCommandController>();
+        //    pcc.m_skill = skill;
+            pcc.m_actor = actor;
+        //}
     }
 
     /// <summary>
@@ -153,8 +167,11 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndCommandSelect()
     {
-        m_CommandWindow.GetComponent<PlayerCommandController>().m_actor = null;
-        m_CommandWindow.SetActive(false);
+        foreach (Transform child in m_commandWindow.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        m_commandWindow.SetActive(false);
     }
 
     /// <summary>

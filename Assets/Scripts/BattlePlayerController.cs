@@ -1,15 +1,14 @@
-﻿using FUnit.GameObjectExtensions;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// 味方戦闘時の行動
 /// </summary>
 public class BattlePlayerController : BattleStatusControllerBase
 {
-    [SerializeField] GameObject m_statusIconPrefab;
+    //[SerializeField] GameObject m_statusIconPrefab;
+
     Animator m_anim;
 
     void Start()
@@ -17,15 +16,16 @@ public class BattlePlayerController : BattleStatusControllerBase
         m_anim = GetComponent<Animator>();
     }
 
-    /// <summary>
-    /// PlayerのStatusIconを生成
-    /// </summary>
-    public override void SetupAwake()
-    {
-        GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
-        m_statusIcon = go.GetComponent<StatusIconController>();
-        base.SetupAwake();
-    }
+    ///// <summary>
+    ///// PlayerのStatusIconを生成
+    ///// </summary>
+    //public override void SetupAwake()
+    //{
+    //    GameObject go = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
+    //    m_statusIcon = go.GetComponent<StatusIconController>();
+    //    m_bm.SetupStatusIcon();
+    //    base.SetupAwake();
+    //}
 
     /// <summary>
     /// 行動開始(味方)
@@ -37,22 +37,21 @@ public class BattlePlayerController : BattleStatusControllerBase
     }
 
     /// <summary>
-    /// 行動終了(味方)
+    /// 攻撃スキル
     /// </summary>
-    public override void EndAction()
+    public void ActionCommand()//(Skill skill)
     {
-        base.EndAction();
+        m_anim.SetTrigger("Attack");
         m_bm.EndCommandSelect();
     }
 
-    /// <summary>
-    /// 攻撃スキル
-    /// </summary>
-    public void AttackCommand()
+    /// Attackアニメーションイベント
+    void HitAttack()
     {
-        m_anim.SetTrigger("Attack");
         Attack(FindObjectOfType<BattleEnemyController>());
+    }
+    void EndAttack()
+    {
         EndAction();
     }
-
 }

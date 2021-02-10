@@ -10,14 +10,16 @@ public class PlayerCommandController : MonoBehaviour
     /// <summary>
     /// 行動者
     /// </summary>
-    public BattlePlayerController m_actor; 
+    public BattlePlayerController m_actor;
+
+    //public Skill m_skill;
 
     /// <summary>
     /// コマンド使用
     /// </summary>
     public void PlayCommand()
     {
-        m_actor.AttackCommand();
+        m_actor.ActionCommand();//(m_skill);
     }
 
 }

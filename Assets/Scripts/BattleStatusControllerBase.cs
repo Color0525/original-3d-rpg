@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// 戦闘ユニットのステータス管理（継承用）
 /// </summary>
 public class BattleStatusControllerBase : MonoBehaviour
 {
-    [SerializeField] string m_name = null;
+    [SerializeField] string m_name;
     [SerializeField] int m_maxHP = 10;
     [SerializeField] int m_currentHP = 10;
     [SerializeField] int m_maxSP = 0;
@@ -19,19 +18,20 @@ public class BattleStatusControllerBase : MonoBehaviour
 
     public static BattleManager m_bm;
 
-    void Awake()
+    void Start()
     {
         m_bm = FindObjectOfType<BattleManager>();
-        SetupAwake();
+        m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
+        //SetupAwake();
     }
 
-    /// <summary>
-    /// Awake時の処理(StatusIconをセット)
-    /// </summary>
-    public virtual void SetupAwake()
-    {
-        m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
-    }
+    ///// <summary>
+    ///// Awake時の処理(StatusIconをセット)
+    ///// </summary>
+    //public virtual void SetupAwake()
+    //{
+    //    m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
+    //}
 
     /// <summary>
     /// 攻撃する
@@ -79,7 +79,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// <summary>
     /// 行動終了
     /// </summary>
-    public virtual void EndAction()
+    public void EndAction()
     {
         m_bm.EndActingTurn();
     }
