@@ -131,6 +131,7 @@ MonoBehaviour:
   m_currentSP: 0
   m_power: 3
   m_statusIcon: {fileID: 3902638632693269987}
+  m_offset: {x: 0, y: 2, z: 0}
 --- !u!1001 &3205426496886727332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 2163153524182208891, guid: 1b98e0afc9de2cb4bba793dc6beec517,
         type: 3}
       propertyPath: m_Name
-      value: BattleEnemyPrefab1
+      value: BattleEnemyPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 5916007273726231337, guid: 1b98e0afc9de2cb4bba793dc6beec517,
         type: 3}

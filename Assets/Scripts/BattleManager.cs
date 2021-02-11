@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -12,12 +13,15 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     [SerializeField] State m_state = State.StartTurn;
 
+    [SerializeField] Transform m_playerBattlePosition;
+    [SerializeField] Transform m_enemyBattlePosition;
     [SerializeField] GameObject m_statusPanel;
     [SerializeField] GameObject m_statusIconPrefab;
     [SerializeField] GameObject m_commandWindow;
     [SerializeField] GameObject m_commandButtonPrefab;
-    [SerializeField] Transform m_playerBattlePosition;
-    [SerializeField] Transform m_enemyBattlePosition;
+    [SerializeField] GameObject m_canvas;
+    [SerializeField] GameObject m_damageTextPrefab;
+
 
     /// <summary>
     ///戦うプレイヤー
@@ -70,7 +74,7 @@ public class BattleManager : MonoBehaviour
 
             //statusIconをセット
             GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
-            player.GetComponent<BattlePlayerController>().m_statusIcon = statusIcon.GetComponent<StatusIconController>();
+            player.GetComponent<BattlePlayerController>().SetupStatusIcon(statusIcon.GetComponent<StatusIconController>());
 
             m_playerUnits.Add(player);
             m_allUnits.Add(player);
@@ -145,7 +149,7 @@ public class BattleManager : MonoBehaviour
     {
         m_state = State.EndTurn;
     }
-
+        
     /// <summary>
     /// コマンドセレクトを開始する
     /// </summary>
@@ -172,6 +176,24 @@ public class BattleManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         m_commandWindow.SetActive(false);
+    }
+
+    
+
+    private Vector3 offset = new Vector3(0, 1.6f, 0);
+
+    
+    /// <summary>
+    /// DamageTextを出す
+    /// </summary>
+    /// <param name="thisCanvas"></param>
+    /// <param name="damage"></param>
+    public void DamageText(Vector3 thisCanvas, int damage)
+    {
+        GameObject go = Instantiate(m_damageTextPrefab, m_canvas.transform);
+        go.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, thisCanvas);
+        go.GetComponent<TextMeshProUGUI>().text = damage.ToString();
+        Destroy(go, 1f);
     }
 
     /// <summary>

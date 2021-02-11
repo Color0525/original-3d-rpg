@@ -7,18 +7,17 @@ using UnityEngine;
 /// </summary>
 public class BattleStatusControllerBase : MonoBehaviour
 {
-    [SerializeField] string m_name;
+    [SerializeField] string m_name = null;
     [SerializeField] int m_maxHP = 10;
     [SerializeField] int m_currentHP = 10;
     [SerializeField] int m_maxSP = 0;
     [SerializeField] int m_currentSP = 0;
     [SerializeField] int m_power = 3;
-    public StatusIconController m_statusIcon;
-
+    [SerializeField] StatusIconController m_statusIcon;
+    [SerializeField] Vector3 m_offset;
     //Skill[] m_skills;
     //Slill m_currentSkill;
     Animator m_anim;
-    [SerializeField] AnimationClip m_ac;
 
     public static BattleManager m_battleManager;
 
@@ -32,6 +31,15 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         //m_BattleManager = FindObjectOfType<BattleManager>();
         m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
+    }
+
+    /// <summary>
+    /// StatusIconをセットアップ
+    /// </summary>
+    /// <param name="statusIconController"></param>
+    public void SetupStatusIcon(StatusIconController statusIconController)
+    {
+        m_statusIcon = statusIconController;
     }
 
     /// <summary>
@@ -81,6 +89,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     void Damage(int power)
     {
         UpdateHP(-power);
+        m_battleManager.DamageText(this.transform.position + m_offset, power);
         if (m_currentHP == 0)
         {
             Debug.Log(this.gameObject.name + " Dead");

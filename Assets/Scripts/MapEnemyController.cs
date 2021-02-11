@@ -37,6 +37,7 @@ public class MapEnemyController : MonoBehaviour
     /// </summary>
     [SerializeField] float m_maxStopTime = 5f;
 
+    [SerializeField] GameObject m_bikkuri;
     Vector3 m_dir = Vector3.zero;
     Rigidbody m_rb;
     NavMeshAgent m_nma;
@@ -112,6 +113,7 @@ public class MapEnemyController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            m_bikkuri.SetActive(true);
             m_chase = true;
             m_anim.SetBool("Chase", true);
         }
@@ -146,6 +148,7 @@ public class MapEnemyController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            m_bikkuri.SetActive(false);
             m_chase = false;
             m_anim.SetBool("Chase", false);
         }

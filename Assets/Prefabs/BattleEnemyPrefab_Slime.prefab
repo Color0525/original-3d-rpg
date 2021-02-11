@@ -195,12 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_name: 
-  m_maxHP: 10
-  m_currentHP: 10
+  m_maxHP: 50
+  m_currentHP: 50
   m_maxSP: 0
   m_currentSP: 0
-  m_power: 3
+  m_power: 15
   m_statusIcon: {fileID: 3531376992952653200}
+  m_offset: {x: 0, y: 2, z: 0}
 --- !u!1001 &3121834469733364439
 PrefabInstance:
   m_ObjectHideFlags: 0
