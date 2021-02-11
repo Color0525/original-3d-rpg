@@ -18,7 +18,7 @@ public class SceneController : MonoBehaviour
     public GameObject[] m_EnemyPrefabs { get; private set; }
 
     //MapScene移行用Player情報
-    public Vector3 m_PlayerMapPosition { get; private set; }
+    public Vector3 m_PlayerMapPosition { get; private set; } 
     public Quaternion m_PlayerMapRotation { get; private set; }
 
 void Awake()
@@ -33,6 +33,14 @@ void Awake()
             m_Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    /// <summary>
+    /// マップシーンを読み込む
+    /// </summary>
+    public void LoadMapScene()
+    {
+        SceneManager.LoadScene("Map");
     }
 
     /// <summary>
@@ -60,21 +68,5 @@ void Awake()
         m_PlayerMapRotation = playerMapRotate;
 
         SceneManager.LoadScene("Battle");
-        //StartCoroutine(LoadScene("Battle"));
     }
-
-    /// <summary>
-    /// マップシーンを読み込む
-    /// </summary>
-    public void LoadMapScene()
-    {
-        SceneManager.LoadScene("Map");
-        //StartCoroutine(LoadScene("Map"));
-    }
-
-    //IEnumerator LoadScene(string name)
-    //{
-    //    SceneManager.LoadScene(name);
-    //    yield return null;
-    //}
 }

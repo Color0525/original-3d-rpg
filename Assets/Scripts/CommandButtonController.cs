@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 味方の戦闘コマンドを管理
+/// コマンドボタンを管理
 /// </summary>
-public class PlayerCommandController : MonoBehaviour
+public class CommandButtonController : MonoBehaviour
 {
     /// <summary>
     /// 行動者

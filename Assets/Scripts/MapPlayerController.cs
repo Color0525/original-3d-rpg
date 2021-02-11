@@ -44,8 +44,11 @@ public class MapPlayerController : MonoBehaviour
             m_attackTrigger.gameObject.SetActive(false);
         }
 
-        transform.position = SceneController.m_Instance.m_PlayerMapPosition;
-        transform.rotation = SceneController.m_Instance.m_PlayerMapRotation;
+        if (SceneController.m_Instance.m_PlayerMapPosition != Vector3.zero)
+        {
+            transform.position = SceneController.m_Instance.m_PlayerMapPosition;
+            transform.rotation = SceneController.m_Instance.m_PlayerMapRotation;
+        }
     }
 
     void Update()

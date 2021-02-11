@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// 戦闘全体を管理
+/// BattleSceneを管理
 /// </summary>
 public class BattleManager : MonoBehaviour
 {
@@ -56,6 +56,8 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
+        
         //SceneControllerからユニット情報を取得
         SceneController sc = SceneController.m_Instance;
         if (sc.m_PlayerPrefabs != null)
@@ -160,7 +162,7 @@ public class BattleManager : MonoBehaviour
         //foreach (var skill in skills)
         //{
             GameObject go = Instantiate(m_commandButtonPrefab, m_commandWindow.transform);
-            PlayerCommandController pcc = go.GetComponent<PlayerCommandController>();
+            CommandButtonController pcc = go.GetComponent<CommandButtonController>();
         //    pcc.m_skill = skill;
             pcc.m_actor = actor;
         //}
