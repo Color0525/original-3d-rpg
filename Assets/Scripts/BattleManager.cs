@@ -76,7 +76,7 @@ public class BattleManager : MonoBehaviour
 
             //statusIconをセット
             GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
-            player.GetComponent<BattlePlayerController>().SetupStatusIcon(statusIcon.GetComponent<StatusIconController>());
+            player.GetComponent<BattlePlayerController>().SetStatusIcon(statusIcon.GetComponent<StatusIconController>());
 
             m_playerUnits.Add(player);
             m_allUnits.Add(player);
@@ -126,8 +126,7 @@ public class BattleManager : MonoBehaviour
                 //戦闘後Mapシーンへ
                 if (Input.anyKeyDown)
                 {
-                    Debug.Log(SceneController.m_Instance);
-                    SceneController.m_Instance.LoadMapScene();
+                    SceneController.m_Instance.CallLoadMapScene();
                 }
                 break;
 
@@ -182,18 +181,18 @@ public class BattleManager : MonoBehaviour
 
     
 
-    private Vector3 offset = new Vector3(0, 1.6f, 0);
 
     
     /// <summary>
     /// DamageTextを出す
     /// </summary>
-    /// <param name="thisCanvas"></param>
+    /// <param name="unitCanvas"></param>
     /// <param name="damage"></param>
-    public void DamageText(Vector3 thisCanvas, int damage)
+    public void DamageText(Vector3 unitCanvas, int damage)
     {
         GameObject go = Instantiate(m_damageTextPrefab, m_canvas.transform);
-        go.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, thisCanvas);
+        go.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, unitCanvas);
+        //z = 0;？
         go.GetComponent<TextMeshProUGUI>().text = damage.ToString();
         Destroy(go, 1f);
     }

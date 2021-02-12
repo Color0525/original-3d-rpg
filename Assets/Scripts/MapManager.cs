@@ -8,6 +8,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] bool m_hideSystemMouseCursor = false;
+    
 
     void Start()
     {
@@ -17,7 +18,6 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// シーンを管理
@@ -21,6 +22,12 @@ public class SceneController : MonoBehaviour
     public Vector3 m_PlayerMapPosition { get; private set; } 
     public Quaternion m_PlayerMapRotation { get; private set; }
 
+    [SerializeField] string m_mapSceneName = "Map";
+    [SerializeField] string m_battleSceneName = "Battle";
+    [SerializeField] GameObject m_fadePanelPrefab;
+    [SerializeField] float m_fadeSpeed = 1.5f;
+    [SerializeField] GameObject m_encountPrefab;
+
 void Awake()
     {
         //シーンをまたぐSceneControllerを唯一にする
@@ -38,20 +45,40 @@ void Awake()
     /// <summary>
     /// マップシーンを読み込む
     /// </summary>
-    public void LoadMapScene()
+    public void CallLoadMapScene()
     {
-        SceneManager.LoadScene("Map");
+        StartCoroutine(LoadMapScene());
+    }
+
+    IEnumerator LoadMapScene()
+    {
+        yield return StartCoroutine(FadeIn(m_fadeSpeed));
+        SceneManager.LoadScene(m_mapSceneName);
+    }
+
+    IEnumerator FadeIn(float fadeSpeed)
+    {
+        GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
+        Image fadeImage = go.GetComponent<Image>();
+        Color currentColor = fadeImage.color;
+        while (fadeImage.color.a < 1f)
+        {
+            currentColor.a += fadeSpeed * Time.deltaTime;
+            fadeImage.color = currentColor;
+            yield return null;
+        }
     }
 
     /// <summary>
-    /// バトルシーンを読み込み、情報を引き継ぐ
+    /// エンカウントで呼び出す。情報を引き継ぎ、バトルシーンを読み込む
     /// </summary>
     /// <param name="playerPrefabs"></param>
     /// <param name="enemyPrefabs"></param>
     /// <param name="playerMapPos"></param>
     /// <param name="playerMapRotate"></param>
-    public void LoadBattleScene(GameObject[] playerPrefabs, GameObject[] enemyPrefabs, Vector3 playerMapPos, Quaternion playerMapRotate)
+    public void EncountLoadBattleScene(GameObject[] playerPrefabs, GameObject[] enemyPrefabs, Vector3 playerMapPos, Quaternion playerMapRotate)
     {
+        //コントロール不可にする
         foreach (var player in FindObjectsOfType<MapPlayerController>())
         {
             player.StopControl();
@@ -61,12 +88,45 @@ void Awake()
             enemy.StopControl();
         }
 
+        //情報の引き継ぎ
         m_PlayerPrefabs = playerPrefabs;
         m_EnemyPrefabs = enemyPrefabs;
-
         m_PlayerMapPosition = playerMapPos;
         m_PlayerMapRotation = playerMapRotate;
 
-        SceneManager.LoadScene("Battle");
+        StartCoroutine(LoadBattleScene());
+    }
+
+    IEnumerator LoadBattleScene()
+    {
+        yield return StartCoroutine(EncountEffect());
+        //yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(m_battleSceneName);
+    }
+
+    IEnumerator EncountEffect()
+    {
+        GameObject go = Instantiate(m_encountPrefab);
+        Animator anim = go.GetComponent<Animator>();
+        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public void DebugLoadScene(string sceneName)
+    {
+        if (sceneName == m_mapSceneName)
+        {
+            StartCoroutine(LoadMapScene());
+        }
+        else if (sceneName == m_battleSceneName)
+        {
+            StartCoroutine(LoadBattleScene());
+        }
+        else
+        {
+            Debug.Log($"Not {sceneName} Scene");
+        }
     }
 }

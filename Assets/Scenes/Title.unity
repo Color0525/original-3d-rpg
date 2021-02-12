@@ -495,14 +495,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579724103}
-        m_MethodName: LoadMapScene
+        m_MethodName: CallLoadMapScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Battle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1161707473
@@ -555,8 +555,8 @@ GameObject:
   - component: {fileID: 1532450019}
   - component: {fileID: 1532450018}
   m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
+  m_Name: MainCanvas
+  m_TagString: MainCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -670,6 +670,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2c9844ef5029d41a10122527d71502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mapSceneName: Map
+  m_battleSceneName: Battle
+  m_fadePanelPrefab: {fileID: 2338664709169822662, guid: 827c5abf4d8e4a648bfab575686c1dfb,
+    type: 3}
+  m_fadeSpeed: 1.5
+  m_encountPrefab: {fileID: 7250500611444901666, guid: 6345b6508eaee5f4eb79fa681199e62d,
+    type: 3}
 --- !u!4 &1579724104
 Transform:
   m_ObjectHideFlags: 0

@@ -34,10 +34,10 @@ public class BattleStatusControllerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// StatusIconをセットアップ
+    /// StatusIconをセット
     /// </summary>
     /// <param name="statusIconController"></param>
-    public void SetupStatusIcon(StatusIconController statusIconController)
+    public void SetStatusIcon(StatusIconController statusIconController)
     {
         m_statusIcon = statusIconController;
     }

@@ -162,7 +162,7 @@ public class MapEnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneController.m_Instance.LoadBattleScene(
+            SceneController.m_Instance.EncountLoadBattleScene(
                 collision.gameObject.GetComponent<MapPlayerController>().m_battlePlayerPrefabs,
                 m_battleEnemyPrefabs,
                 collision.gameObject.transform.position,
@@ -176,6 +176,9 @@ public class MapEnemyController : MonoBehaviour
     public void StopControl()
     {
         m_stop = true;
+        m_nma.SetDestination(this.transform.position);
+        m_anim.speed = 0;
+        m_rb.isKinematic = true;
     }
 
     /// <summary>

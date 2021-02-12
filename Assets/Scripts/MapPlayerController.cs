@@ -137,6 +137,8 @@ public class MapPlayerController : MonoBehaviour
     public void StopControl()
     {
         m_stop = true;
+        m_anim.speed = 0;
+        m_rb.isKinematic = true;
     }
 
     /// <summary>
