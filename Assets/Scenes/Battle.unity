@@ -4514,7 +4514,7 @@ GameObject:
   - component: {fileID: 467062243}
   m_Layer: 5
   m_Name: StatusPanel
-  m_TagString: Untagged
+  m_TagString: StatusPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7934,14 +7934,10 @@ MonoBehaviour:
   m_state: 0
   m_playerBattlePosition: {fileID: 1291584367}
   m_enemyBattlePosition: {fileID: 1078969167}
-  m_statusPanel: {fileID: 467062241}
-  m_statusIconPrefab: {fileID: 8737785771190363022, guid: 97d236ecabac3eb4195dac2e24b25feb,
-    type: 3}
   m_commandWindow: {fileID: 894164071}
   m_commandButtonPrefab: {fileID: 4596506479027596017, guid: a52f2eb1254751c41b196600e872417e,
     type: 3}
-  m_canvas: {fileID: 1238944647}
-  m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,
+  m_resultTimelinePrefab: {fileID: 2325165732975792530, guid: d0b881f7c7260d642b25d2a778702c1d,
     type: 3}
   m_playerPrefabs:
   - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
@@ -9020,6 +9016,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9152,6 +9149,40 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &963459581
 PrefabInstance:
   m_ObjectHideFlags: 0

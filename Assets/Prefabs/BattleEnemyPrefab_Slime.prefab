@@ -202,6 +202,8 @@ MonoBehaviour:
   m_power: 15
   m_statusIcon: {fileID: 3531376992952653200}
   m_offset: {x: 0, y: 2, z: 0}
+  m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,
+    type: 3}
 --- !u!1001 &3121834469733364439
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6143,7 +6143,7 @@ GameObject:
   - component: {fileID: 4794019544614945757}
   - component: {fileID: 4794019544614945759}
   m_Layer: 0
-  m_Name: MapPlayerPrehab
+  m_Name: MapPlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6191,7 +6191,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4794019544614945728}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 825ee72f4b13f9e458b910a706781a29, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3

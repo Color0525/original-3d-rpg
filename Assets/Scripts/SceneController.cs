@@ -52,11 +52,11 @@ void Awake()
 
     IEnumerator LoadMapScene()
     {
-        yield return StartCoroutine(FadeIn(m_fadeSpeed));
+        yield return StartCoroutine(FadeOut(m_fadeSpeed));
         SceneManager.LoadScene(m_mapSceneName);
     }
 
-    IEnumerator FadeIn(float fadeSpeed)
+    IEnumerator FadeOut(float fadeSpeed)
     {
         GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
         Image fadeImage = go.GetComponent<Image>();
@@ -76,7 +76,7 @@ void Awake()
     /// <param name="enemyPrefabs"></param>
     /// <param name="playerMapPos"></param>
     /// <param name="playerMapRotate"></param>
-    public void EncountLoadBattleScene(GameObject[] playerPrefabs, GameObject[] enemyPrefabs, Vector3 playerMapPos, Quaternion playerMapRotate)
+    public void EncountLoadBattleScene(GameObject[] playerPrefabs, GameObject[] enemyPrefabs, Transform playerMapTransform)
     {
         //コントロール不可にする
         foreach (var player in FindObjectsOfType<MapPlayerController>())
@@ -91,8 +91,8 @@ void Awake()
         //情報の引き継ぎ
         m_PlayerPrefabs = playerPrefabs;
         m_EnemyPrefabs = enemyPrefabs;
-        m_PlayerMapPosition = playerMapPos;
-        m_PlayerMapRotation = playerMapRotate;
+        m_PlayerMapPosition = playerMapTransform.position;
+        m_PlayerMapRotation = playerMapTransform.rotation;
 
         StartCoroutine(LoadBattleScene());
     }

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -15,13 +14,11 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] Transform m_playerBattlePosition;
     [SerializeField] Transform m_enemyBattlePosition;
-    [SerializeField] GameObject m_statusPanel;
-    [SerializeField] GameObject m_statusIconPrefab;
+    //[SerializeField] GameObject m_statusPanel;
+    //[SerializeField] GameObject m_statusIconPrefab;
     [SerializeField] GameObject m_commandWindow;
     [SerializeField] GameObject m_commandButtonPrefab;
-    [SerializeField] GameObject m_canvas;
-    [SerializeField] GameObject m_damageTextPrefab;
-
+    [SerializeField] GameObject m_resultTimelinePrefab;
 
     /// <summary>
     ///戦うプレイヤー
@@ -74,9 +71,9 @@ public class BattleManager : MonoBehaviour
         {
             GameObject player = Instantiate(unit, m_playerBattlePosition.position, m_playerBattlePosition.rotation);
 
-            //statusIconをセット
-            GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
-            player.GetComponent<BattlePlayerController>().SetStatusIcon(statusIcon.GetComponent<StatusIconController>());
+            ////statusIconをセット
+            //GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
+            //player.GetComponent<BattlePlayerController>().SetStatusIcon(statusIcon.GetComponent<StatusIconController>());
 
             m_playerUnits.Add(player);
             m_allUnits.Add(player);
@@ -123,7 +120,8 @@ public class BattleManager : MonoBehaviour
                 break;
 
             case State.AfterBattle:
-                //戦闘後Mapシーンへ
+                //戦闘後ResultTimelineを再生。その後Mapシーンへ
+                //Instantiate(m_resultTimelinePrefab);
                 if (Input.anyKeyDown)
                 {
                     SceneController.m_Instance.CallLoadMapScene();
@@ -177,24 +175,6 @@ public class BattleManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         m_commandWindow.SetActive(false);
-    }
-
-    
-
-
-    
-    /// <summary>
-    /// DamageTextを出す
-    /// </summary>
-    /// <param name="unitCanvas"></param>
-    /// <param name="damage"></param>
-    public void DamageText(Vector3 unitCanvas, int damage)
-    {
-        GameObject go = Instantiate(m_damageTextPrefab, m_canvas.transform);
-        go.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, unitCanvas);
-        //z = 0;？
-        go.GetComponent<TextMeshProUGUI>().text = damage.ToString();
-        Destroy(go, 1f);
     }
 
     /// <summary>

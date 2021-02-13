@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -15,6 +16,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     [SerializeField] int m_power = 3;
     [SerializeField] StatusIconController m_statusIcon;
     [SerializeField] Vector3 m_offset;
+    [SerializeField] GameObject m_damageTextPrefab;
     //Skill[] m_skills;
     //Slill m_currentSkill;
     Animator m_anim;
@@ -24,12 +26,12 @@ public class BattleStatusControllerBase : MonoBehaviour
     private void Awake()//StartBattle前のstate実装後Start()に戻す
     {
         m_battleManager = FindObjectOfType<BattleManager>();
-        m_anim = GetComponent<Animator>();
     }
 
     void Start()
     {
         //m_BattleManager = FindObjectOfType<BattleManager>();
+        m_anim = GetComponent<Animator>();
         m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
     }
 
@@ -89,7 +91,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     void Damage(int power)
     {
         UpdateHP(-power);
-        m_battleManager.DamageText(this.transform.position + m_offset, power);
+        DamageText(this.transform.position + m_offset, power);
         if (m_currentHP == 0)
         {
             Debug.Log(this.gameObject.name + " Dead");
@@ -102,6 +104,20 @@ public class BattleStatusControllerBase : MonoBehaviour
             m_anim.SetTrigger("GetHit");
         }
     }
+
+    /// <summary>
+    /// DamageTextを出す
+    /// </summary>
+    /// <param name="unitCanvas"></param>
+    /// <param name="damage"></param>
+    void DamageText(Vector3 unitCanvas, int damage)
+    {
+        GameObject go = Instantiate(m_damageTextPrefab, GameObject.FindWithTag("MainCanvas").transform);
+        go.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, unitCanvas);
+        go.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
+        Destroy(go, 1f);
+    }
+
     /// <summary>
     /// HPを更新
     /// </summary>

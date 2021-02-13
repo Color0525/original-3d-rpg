@@ -7,6 +7,15 @@ using UnityEngine;
 /// </summary>
 public class BattlePlayerController : BattleStatusControllerBase
 {
+    [SerializeField] GameObject m_statusIconPrefab;
+
+    void Awake()
+    {
+        //statusIconをセット
+        GameObject statusIcon = Instantiate(m_statusIconPrefab, GameObject.FindWithTag("StatusPanel").transform);
+        SetStatusIcon(statusIcon.GetComponent<StatusIconController>());
+    }
+
     /// <summary>
     /// 行動開始(味方)
     /// </summary>

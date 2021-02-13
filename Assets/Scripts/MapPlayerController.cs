@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -139,6 +140,7 @@ public class MapPlayerController : MonoBehaviour
         m_stop = true;
         m_anim.speed = 0;
         m_rb.isKinematic = true;
+        Camera.main.GetComponent<CinemachineBrain>().enabled = false;
     }
 
     /// <summary>

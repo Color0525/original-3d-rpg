@@ -555,6 +555,10 @@ MonoBehaviour:
   m_power: 20
   m_statusIcon: {fileID: 0}
   m_offset: {x: 0, y: 1, z: 0}
+  m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,
+    type: 3}
+  m_statusIconPrefab: {fileID: 8737785771190363022, guid: 97d236ecabac3eb4195dac2e24b25feb,
+    type: 3}
 --- !u!1 &6668329273356992693
 GameObject:
   m_ObjectHideFlags: 0
