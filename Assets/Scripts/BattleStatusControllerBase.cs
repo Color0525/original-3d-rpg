@@ -17,6 +17,8 @@ public class BattleStatusControllerBase : MonoBehaviour
     [SerializeField] StatusIconController m_statusIcon;
     [SerializeField] Vector3 m_offset;
     [SerializeField] GameObject m_damageTextPrefab;
+    //public bool m_InAction { get; private set; } = false;
+    //public bool m_InAnimation { get; private set; } = false;
     //Skill[] m_skills;
     //Slill m_currentSkill;
     Animator m_anim;
@@ -96,7 +98,7 @@ public class BattleStatusControllerBase : MonoBehaviour
         {
             Debug.Log(this.gameObject.name + " Dead");
             m_anim.SetBool("Death", true);
-            m_battleManager.DeleteUnitsList(this.gameObject);
+            m_battleManager.DeleteUnitsList(this);
         }
         else
         {

@@ -100,7 +100,6 @@ void Awake()
     IEnumerator LoadBattleScene()
     {
         yield return StartCoroutine(EncountEffect());
-        //yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(m_battleSceneName);
     }
 
