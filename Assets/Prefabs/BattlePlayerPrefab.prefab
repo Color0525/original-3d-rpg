@@ -552,15 +552,14 @@ MonoBehaviour:
   m_currentHP: 100
   m_maxSP: 10
   m_currentSP: 10
-  m_power: 30
+  m_power: 50
   m_statusIcon: {fileID: 0}
   m_offset: {x: 0, y: 1, z: 0}
   m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,
     type: 3}
   m_statusIconPrefab: {fileID: 8737785771190363022, guid: 97d236ecabac3eb4195dac2e24b25feb,
     type: 3}
-  m_slideEffectPanelPrefab: {fileID: 8296515179378182391, guid: 6e5d4489a67593540b09684aed8a99c8,
-    type: 3}
+  m_slideEffectPrefab: {fileID: 0}
 --- !u!1 &6668329273356992693
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ using UnityEngine;
 public class BattlePlayerController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_statusIconPrefab;
-    [SerializeField] GameObject m_slideEffectPanelPrefab;
+    //[SerializeField] GameObject m_slideEffectPrefab;
 
     void Awake()
     {
@@ -23,20 +23,20 @@ public class BattlePlayerController : BattleStatusControllerBase
     public override void StartAction()
     {
         base.StartAction();
-        //m_battleManager.StartCommandSelect(this);
-        StartCoroutine(PlayerStartActionDirecting());
-    }
-    IEnumerator PlayerStartActionDirecting()
-    {
-        GameObject go = Instantiate(m_slideEffectPanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
-        Animator anim = go.GetComponent<Animator>();
-        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        Destroy(go);
         m_battleManager.StartCommandSelect(this);
+        //StartCoroutine(StartCommandSelectDirecting());
     }
+    //IEnumerator StartCommandSelectDirecting()
+    //{
+    //    GameObject go = Instantiate(m_slideEffectPrefab, GameObject.FindWithTag("MainCanvas").transform);
+    //    Animator anim = go.GetComponent<Animator>();
+    //    while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+    //    {
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    Destroy(go);
+    //    m_battleManager.StartCommandSelect(this);
+    //}
 
     /// <summary>
     /// 行動コマンド(Player)

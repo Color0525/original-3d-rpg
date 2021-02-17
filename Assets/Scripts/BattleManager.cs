@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -13,18 +12,21 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// 現在の戦闘状態
     /// </summary>
-    [SerializeField] BattleState m_battleState = BattleState.StartTurn;
+    [SerializeField] BattleState m_battleState = BattleState.BeginBattle;
 
     [SerializeField] Transform m_playerBattlePosition;
     [SerializeField] Transform m_enemyBattlePosition;
     //[SerializeField] GameObject m_statusPanel;
     //[SerializeField] GameObject m_statusIconPrefab;
+    [SerializeField] float m_beginBattleTime = 2f;
+    [SerializeField] CinemachineVirtualCamera m_beginBattleCamera;
+    //[SerializeField] Animator m_slideEffectPanel;
     [SerializeField] GameObject m_commandWindow;
     [SerializeField] GameObject m_commandButtonPrefab;
-    //[SerializeField] GameObject m_slideEffectPanel;
     [SerializeField] PlayableDirector m_winCutScene;
     [SerializeField] PlayableDirector m_loseCutScene;
-    PlayableDirector m_ResultCutScene;
+    //PlayableDirector m_ResultCutScene;
+    [SerializeField] float m_delayAtEndTurn = 1f;
 
     /// <summary>
     ///戦うプレイヤー
@@ -49,18 +51,20 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// バトル中か
     /// </summary>
-    bool inBattle = true;
+    bool m_inBattle = true;
     /// <summary>
     /// 勝利したか
     /// </summary>
-    bool won = false;
+    bool m_won = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = true;
-        
+
+        StartCoroutine(SceneController.m_Instance.FadeIn());
+
         //SceneControllerからユニット情報を取得
         SceneController sc = SceneController.m_Instance;
         if (sc.m_PlayerPrefabs != null)
@@ -75,7 +79,7 @@ public class BattleManager : MonoBehaviour
         //ユニットをインスタンスしてListにAdd
         foreach (var unit in m_playerPrefabs)
         {
-            GameObject player = Instantiate(unit, m_playerBattlePosition.position, m_playerBattlePosition.rotation);
+            GameObject player = Instantiate(unit, m_playerBattlePosition);
 
             ////statusIconをセット
             //GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
@@ -86,10 +90,13 @@ public class BattleManager : MonoBehaviour
         }
         foreach (var unit in m_enemyPrefabs)
         {
-            GameObject enemy = Instantiate(unit, m_enemyBattlePosition.position, m_enemyBattlePosition.rotation);
+            GameObject enemy = Instantiate(unit, m_enemyBattlePosition);
             m_enemyUnits.Add(enemy.GetComponent<BattleEnemyController>());
             m_allUnits.Add(enemy.GetComponent<BattleStatusControllerBase>());
         }
+
+        //戦闘開始演出
+        StartCoroutine(BeginBattle(m_beginBattleTime));
     }
 
     // Update is called once per frame
@@ -98,9 +105,9 @@ public class BattleManager : MonoBehaviour
         //State管理
         switch (m_battleState)
         {
-            //case BattleState.StartDirecting:
-            //    StartCoroutine(SlideEffectAndSetState(BattleState.StartTurn));
-            //    break;
+            case BattleState.BeginBattle:
+                //開始演出
+                break;
 
             case BattleState.StartTurn:
                 //現在ユニット行動開始
@@ -108,20 +115,16 @@ public class BattleManager : MonoBehaviour
                 m_allUnits[m_currentNum].GetComponent<BattleStatusControllerBase>().StartAction();
                 break;
 
-            case BattleState.ActingTurn:
+            case BattleState.InAction:
                 //行動中
-                
                 break;
 
             case BattleState.EndTurn:
                 //戦闘終了したときResultTimelineを再生しAfterBattleへ
-                if (!inBattle)
+                if (!m_inBattle)
                 {
-                    foreach (BattleStatusControllerBase unit in m_allUnits)
-                    {
-                       unit.gameObject.SetActive(false);
-                    }
-                    (won ? m_winCutScene : m_loseCutScene).Play();
+                    //＜playerステータス引き継ぎ
+                    (m_won ? m_winCutScene : m_loseCutScene).Play();
                     //Instantiate(m_resultTimelinePrefab);//setactiv?
                     //StartCoroutine(DelayAndUpdateState(0.5f, BattleState.AfterBattle));
                     m_battleState = BattleState.AfterBattle;
@@ -181,11 +184,24 @@ public class BattleManager : MonoBehaviour
     //}
 
     /// <summary>
+    /// 戦闘開始演出
+    /// </summary>
+    /// <param name="aimTime"></param>
+    /// <returns></returns>
+    IEnumerator BeginBattle(float aimTime)
+    {
+        yield return StartCoroutine(SceneController.m_Instance.SlideEffect());
+        yield return new WaitForSeconds(aimTime);
+        m_beginBattleCamera.gameObject.SetActive(false);
+        m_battleState = BattleState.StartTurn;
+    }
+
+    /// <summary>
     /// 戦闘状態を行動中にする
     /// </summary>
     public void StartActingTurn()
     {
-        m_battleState = BattleState.ActingTurn;
+        m_battleState = BattleState.InAction;
     }
 
     /// <summary>
@@ -193,9 +209,16 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndActingTurn()
     {
-        StartCoroutine(DelayAndUpdateState(0.5f, BattleState.EndTurn));
+        StartCoroutine(DelayAndUpdateState(m_delayAtEndTurn, BattleState.EndTurn));
         //m_battleState = BattleState.EndTurn;
     }
+
+    /// <summary>
+    /// Delayし、戦闘状態を更新する
+    /// </summary>
+    /// <param name="delayTime"></param>
+    /// <param name="state"></param>
+    /// <returns></returns>
     IEnumerator DelayAndUpdateState(float delayTime, BattleState state)
     {
         yield return new WaitForSeconds(delayTime);
@@ -231,7 +254,7 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 死亡ユニットを現在戦闘ユニットリストから消す
+    /// 死亡ユニットを現在戦闘ユニットリストから消し、どちらかの陣営が全滅したならバトル終了状態に
     /// </summary>
     /// <param name="deadUnit"></param>
     public void DeleteUnitsList(BattleStatusControllerBase deadUnit)
@@ -242,9 +265,9 @@ public class BattleManager : MonoBehaviour
             m_enemyUnits.Remove(deadUnit.gameObject.GetComponent<BattleEnemyController>());
             if (m_enemyUnits.Count == 0)
             {
-                inBattle = false;
-                won = true;
-                m_ResultCutScene = m_winCutScene;
+                m_inBattle = false;
+                m_won = true;
+                //m_ResultCutScene = m_winCutScene;
             }
         }
         else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
@@ -252,8 +275,8 @@ public class BattleManager : MonoBehaviour
             m_playerUnits.Remove(deadUnit.gameObject.GetComponent<BattlePlayerController>());
             if (m_playerUnits.Count == 0)
             {
-                inBattle = false;
-                won = false;
+                m_inBattle = false;
+                m_won = false;
                 //m_ResultCutScene = m_loseCutScene;
             }
         }
@@ -264,9 +287,9 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     enum BattleState
     {
-        //StartDirecting,
+        BeginBattle,
         StartTurn,
-        ActingTurn,
+        InAction,
         EndTurn,
         AfterBattle,
     }

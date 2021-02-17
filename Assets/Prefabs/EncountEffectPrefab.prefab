@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7250500611444901664}
   - component: {fileID: 7250500611444901665}
   m_Layer: 0
-  m_Name: EncountAnim
+  m_Name: EncountEffectPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

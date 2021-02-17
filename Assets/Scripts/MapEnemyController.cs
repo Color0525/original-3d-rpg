@@ -162,6 +162,7 @@ public class MapEnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            FindObjectOfType<MapManager>().Freeze();
             SceneController.m_Instance.EncountLoadBattleScene(
                 collision.gameObject.GetComponent<MapPlayerController>().m_battlePlayerPrefabs,
                 m_battleEnemyPrefabs,

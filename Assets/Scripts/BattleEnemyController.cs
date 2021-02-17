@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class BattleEnemyController : BattleStatusControllerBase
 {
+    [SerializeField] GameObject m_DeadParticlePrefab;
+
     /// <summary>
     /// 行動(敵)
     /// </summary>
@@ -32,5 +34,11 @@ public class BattleEnemyController : BattleStatusControllerBase
     {
         base.Hit();
         Attack(FindObjectOfType<BattlePlayerController>());//(BEC, m_currentSkill.m_power)
+    }
+
+    void Dead()
+    {
+        Instantiate(m_DeadParticlePrefab, this.gameObject.transform.position, Quaternion.identity);
+        this.gameObject.SetActive(false);
     }
 }

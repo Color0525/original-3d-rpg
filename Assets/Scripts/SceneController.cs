@@ -19,16 +19,20 @@ public class SceneController : MonoBehaviour
     public GameObject[] m_EnemyPrefabs { get; private set; }
 
     //MapScene移行用Player情報
-    public Vector3 m_PlayerMapPosition { get; private set; } 
+    public Vector3 m_PlayerMapPosition { get; private set; }
     public Quaternion m_PlayerMapRotation { get; private set; }
+
+
+    //public bool m_newGame { get; private set; } = true;//あとでfalse
 
     [SerializeField] string m_mapSceneName = "Map";
     [SerializeField] string m_battleSceneName = "Battle";
     [SerializeField] GameObject m_fadePanelPrefab;
-    [SerializeField] float m_fadeSpeed = 1.5f;
-    [SerializeField] GameObject m_encountPrefab;
+    [SerializeField] float m_fadeSpeed = 1f;
+    [SerializeField] GameObject m_encountEffectPrefab;
+    [SerializeField] GameObject m_slideEffectPrefab;
 
-void Awake()
+    void Awake()
     {
         //シーンをまたぐSceneControllerを唯一にする
         if (m_Instance != null)
@@ -53,20 +57,37 @@ void Awake()
     IEnumerator LoadMapScene()
     {
         yield return StartCoroutine(FadeOut(m_fadeSpeed));
-        SceneManager.LoadScene(m_mapSceneName);
+        StartCoroutine(LoadSceneCoroutine(m_mapSceneName));
+        //StartCoroutine(FadeIn(m_fadeSpeed));
     }
 
-    IEnumerator FadeOut(float fadeSpeed)
+    IEnumerator FadeOut(float fadeSpeed = 1f)
     {
         GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
         Image fadeImage = go.GetComponent<Image>();
+        fadeImage.color = Color.clear;
         Color currentColor = fadeImage.color;
         while (fadeImage.color.a < 1f)
         {
-            currentColor.a += fadeSpeed * Time.deltaTime;
+            currentColor.a += 1 / fadeSpeed * Time.deltaTime;
             fadeImage.color = currentColor;
             yield return null;
         }
+        Destroy(go, fadeSpeed);
+    }
+    public IEnumerator FadeIn(float fadeSpeed = 1f)
+    {
+        GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
+        Image fadeImage = go.GetComponent<Image>();
+        fadeImage.color = Color.black;
+        Color currentColor = fadeImage.color;
+        while (fadeImage.color.a > 0f)
+        {
+            currentColor.a -= 1f / fadeSpeed * Time.deltaTime;
+            fadeImage.color = currentColor;
+            yield return null;
+        }
+        Destroy(go, fadeSpeed);
     }
 
     /// <summary>
@@ -78,16 +99,6 @@ void Awake()
     /// <param name="playerMapRotate"></param>
     public void EncountLoadBattleScene(GameObject[] playerPrefabs, GameObject[] enemyPrefabs, Transform playerMapTransform)
     {
-        //コントロール不可にする
-        foreach (var player in FindObjectsOfType<MapPlayerController>())
-        {
-            player.StopControl();
-        }
-        foreach (var enemy in FindObjectsOfType<MapEnemyController>())
-        {
-            enemy.StopControl();
-        }
-
         //情報の引き継ぎ
         m_PlayerPrefabs = playerPrefabs;
         m_EnemyPrefabs = enemyPrefabs;
@@ -100,32 +111,47 @@ void Awake()
     IEnumerator LoadBattleScene()
     {
         yield return StartCoroutine(EncountEffect());
-        SceneManager.LoadScene(m_battleSceneName);
+        StartCoroutine(LoadSceneCoroutine(m_battleSceneName));
+        //StartCoroutine(FadeIn(m_fadeSpeed));
+        //StartCoroutine(SlideEffect());
     }
-
     IEnumerator EncountEffect()
     {
-        GameObject go = Instantiate(m_encountPrefab);
+        GameObject go = Instantiate(m_encountEffectPrefab);
         Animator anim = go.GetComponent<Animator>();
         while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             yield return new WaitForEndOfFrame();
         }
+        Destroy(go);
+    }
+    public IEnumerator SlideEffect()
+    {
+        GameObject go = Instantiate(m_slideEffectPrefab, GameObject.FindWithTag("MainCanvas").transform);
+        Animator anim = go.GetComponent<Animator>();
+        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Destroy(go);
     }
 
-    public void DebugLoadScene(string sceneName)
+    IEnumerator LoadSceneCoroutine(string sceneName)
     {
-        if (sceneName == m_mapSceneName)
-        {
-            StartCoroutine(LoadMapScene());
-        }
-        else if (sceneName == m_battleSceneName)
-        {
-            StartCoroutine(LoadBattleScene());
-        }
-        else
-        {
-            Debug.Log($"Not {sceneName} Scene");
-        }
+        SceneManager.LoadScene(sceneName);
+        yield return null;
+
+        //if (sceneName == m_mapSceneName)
+        //{
+        //    StartCoroutine(LoadMapScene());
+        //}
+        //else if (sceneName == m_battleSceneName)
+        //{
+        //    StartCoroutine(LoadBattleScene());
+        //}
+        //else
+        //{
+        //    Debug.Log($"Not {sceneName} Scene");
+        //}
     }
 }

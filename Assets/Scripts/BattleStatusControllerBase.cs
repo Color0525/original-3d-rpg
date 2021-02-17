@@ -25,14 +25,14 @@ public class BattleStatusControllerBase : MonoBehaviour
 
     public static BattleManager m_battleManager;
 
-    private void Awake()//StartBattle前のstate実装後Start()に戻す
-    {
-        m_battleManager = FindObjectOfType<BattleManager>();
-    }
+    //private void Awake()//StartBattle前のstate実装後Start()に戻す
+    //{
+    //    m_battleManager = FindObjectOfType<BattleManager>();
+    //}
 
     void Start()
     {
-        //m_BattleManager = FindObjectOfType<BattleManager>();
+        m_battleManager = FindObjectOfType<BattleManager>();
         m_anim = GetComponent<Animator>();
         m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
     }
@@ -97,7 +97,7 @@ public class BattleStatusControllerBase : MonoBehaviour
         if (m_currentHP == 0)
         {
             Debug.Log(this.gameObject.name + " Dead");
-            m_anim.SetBool("Death", true);
+            m_anim.SetBool("Dead", true);
             m_battleManager.DeleteUnitsList(this);
         }
         else
