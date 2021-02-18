@@ -9,12 +9,15 @@ using UnityEngine.Playables;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] bool m_hideSystemMouseCursor = false;
-    [SerializeField] PlayableDirector m_opening;
+    [SerializeField] PlayableDirector m_openingCutScene;
+    [SerializeField] GameObject m_mapPlayer;
+    [SerializeField] GameObject m_mainVirtualCamera;
 
-    bool m_newGame = true;//あとでfalse
+    bool m_newGame = true;
 
     void Start()
     {
+        //マウスカーソル非表示
         if (m_hideSystemMouseCursor)
         {
             Cursor.visible = false;
@@ -22,11 +25,38 @@ public class MapManager : MonoBehaviour
 
         SceneController.m_Instance.FadeIn();
 
+        //NewGameならOP再生
         if (m_newGame)
         {
-            m_opening.Play();
             m_newGame = false;
+            StartCoroutine(PlayOpeningCutScene());
         }
+        else
+        {
+            ActivationPlayer();
+        }
+    }
+
+    IEnumerator PlayOpeningCutScene()
+    {
+        m_openingCutScene.gameObject.SetActive(true);
+        m_openingCutScene.Play();
+        while (m_openingCutScene.state == PlayState.Playing)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        m_openingCutScene.gameObject.SetActive(false);
+        ActivationPlayer();
+
+    }
+
+    /// <summary>
+    /// PlayerとメインバーチャルカメラをActiveにする
+    /// </summary>
+    void ActivationPlayer()
+    {
+        m_mapPlayer.SetActive(true);
+        m_mainVirtualCamera.SetActive(true);
     }
 
     /// <summary>

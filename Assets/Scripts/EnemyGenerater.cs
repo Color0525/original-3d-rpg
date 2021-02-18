@@ -24,15 +24,19 @@ public class EnemyGenerater : MonoBehaviour
     /// </summary>
     [SerializeField] float m_playerDis = 10f;
     /// <summary>
+    /// プレイヤーの位置
+    /// </summary>
+    [SerializeField] Transform m_playerTransform;
+    /// <summary>
     /// 生成済みかどうか
     /// </summary>
     [SerializeField] bool m_generated = false;
 
     void Update() 
     {
-        if (FindObjectOfType<MapPlayerController>() && !m_generated)
+        if (!m_generated)
         {
-            Vector3 playerPos = FindObjectOfType<MapPlayerController>().transform.position;
+            Vector3 playerPos = m_playerTransform.position;
             for (int i = 0; i < m_instanceNum; i++)
             {
                 float randomX = Random.Range(this.transform.position.x - m_generateRange, this.transform.position.x + m_generateRange);
