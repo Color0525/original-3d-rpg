@@ -19,11 +19,11 @@ public class SceneController : MonoBehaviour
     public GameObject[] m_EnemyPrefabs { get; private set; }
 
     //MapScene移行用Player情報
-    public Vector3 m_PlayerMapPosition { get; private set; }
-    public Quaternion m_PlayerMapRotation { get; private set; }
+    public Vector3 m_PlayerMapPosition { get; private set; } = Vector3.zero;
+    public Quaternion m_PlayerMapRotation { get; private set; } = Quaternion.identity;
 
-
-    //public bool m_newGame { get; private set; } = true;//あとでfalse
+    public bool m_NewGame { get; private set; } = false;
+    public bool m_GameOver { get; private set; } = false;
 
     [SerializeField] string m_mapSceneName = "Map";
     [SerializeField] string m_battleSceneName = "Battle";
@@ -47,20 +47,46 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
-    /// マップシーンを読み込む
+    /// NewGameを始める
     /// </summary>
-    public void CallLoadMapScene()
+    public void CallNewGameLoadMapScene()
     {
+        m_NewGame = true;
+        StartCoroutine(LoadMapScene());
+    }
+    /// <summary>
+    /// NewGameフラグをfalseに
+    /// </summary>
+    public void SetNewGameFalse()
+    {
+        m_NewGame = false;
+    }
+
+    /// <summary>
+    /// ゲームオーバーか判定し、マップシーン読み込みを呼ぶ
+    /// </summary>
+    public void CallLoadMapScene(bool gameOverFlag = false)
+    {
+        m_GameOver = gameOverFlag;
+        if (m_GameOver)
+        {
+            m_PlayerMapPosition = Vector3.zero;
+            m_PlayerMapRotation = Quaternion.identity;
+        }
         StartCoroutine(LoadMapScene());
     }
 
+    /// <summary>
+    /// フェードアウトし、MapSceneを読み込む
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadMapScene()
     {
         yield return StartCoroutine(FadeOut(m_fadeSpeed));
         StartCoroutine(LoadSceneCoroutine(m_mapSceneName));
         //StartCoroutine(FadeIn(m_fadeSpeed));
     }
-
+    //フェードアウト
     IEnumerator FadeOut(float fadeSpeed = 1f)
     {
         GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
@@ -75,6 +101,7 @@ public class SceneController : MonoBehaviour
         }
         Destroy(go, fadeSpeed);
     }
+    //フェードイン
     public IEnumerator FadeIn(float fadeSpeed = 1f)
     {
         GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
@@ -89,9 +116,11 @@ public class SceneController : MonoBehaviour
         }
         Destroy(go, fadeSpeed);
     }
+    
+
 
     /// <summary>
-    /// エンカウントで呼び出す。情報を引き継ぎ、バトルシーンを読み込む
+    /// エンカウントで呼び出す。情報を引き継ぎ、バトルシーン読み込みを呼ぶ
     /// </summary>
     /// <param name="playerPrefabs"></param>
     /// <param name="enemyPrefabs"></param>
@@ -107,7 +136,10 @@ public class SceneController : MonoBehaviour
 
         StartCoroutine(LoadBattleScene());
     }
-
+    /// <summary>
+    /// エンカウントエフェクトを再生し、BattleSceneを読み込む
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LoadBattleScene()
     {
         yield return StartCoroutine(EncountEffect());
@@ -115,6 +147,7 @@ public class SceneController : MonoBehaviour
         //StartCoroutine(FadeIn(m_fadeSpeed));
         //StartCoroutine(SlideEffect());
     }
+    //エンカウントエフェクト
     IEnumerator EncountEffect()
     {
         GameObject go = Instantiate(m_encountEffectPrefab);
@@ -125,6 +158,7 @@ public class SceneController : MonoBehaviour
         }
         Destroy(go);
     }
+    //スライドエフェクト
     public IEnumerator SlideEffect()
     {
         GameObject go = Instantiate(m_slideEffectPrefab, GameObject.FindWithTag("MainCanvas").transform);
@@ -135,23 +169,10 @@ public class SceneController : MonoBehaviour
         }
         Destroy(go);
     }
-
+    //コルーチンとしてSceneを読み込む
     IEnumerator LoadSceneCoroutine(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
         yield return null;
-
-        //if (sceneName == m_mapSceneName)
-        //{
-        //    StartCoroutine(LoadMapScene());
-        //}
-        //else if (sceneName == m_battleSceneName)
-        //{
-        //    StartCoroutine(LoadBattleScene());
-        //}
-        //else
-        //{
-        //    Debug.Log($"Not {sceneName} Scene");
-        //}
     }
 }

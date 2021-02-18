@@ -144,7 +144,7 @@ public class BattleManager : MonoBehaviour
                 //クリックでMapシーンへ
                 if (Input.anyKeyDown)
                 {
-                    SceneController.m_Instance.CallLoadMapScene();
+                    SceneController.m_Instance.CallLoadMapScene(!m_won);
                     //m_resultCutScene.gameObject.SetActive(false);
                 }
                 ////クリックでMapシーンへ

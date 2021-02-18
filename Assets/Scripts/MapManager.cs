@@ -10,10 +10,11 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField] bool m_hideSystemMouseCursor = false;
     [SerializeField] PlayableDirector m_openingCutScene;
+    [SerializeField] PlayableDirector m_continueCutScene;
     [SerializeField] GameObject m_mapPlayer;
     [SerializeField] GameObject m_mainVirtualCamera;
 
-    bool m_newGame = true;
+    //public bool m_newGame { get; private set; } = false;
 
     void Start()
     {
@@ -25,11 +26,15 @@ public class MapManager : MonoBehaviour
 
         SceneController.m_Instance.FadeIn();
 
-        //NewGameならOP再生
-        if (m_newGame)
+        //状態に応じCutScene再生
+        if (SceneController.m_Instance.m_NewGame)
         {
-            m_newGame = false;
+            SceneController.m_Instance.SetNewGameFalse();
             StartCoroutine(PlayOpeningCutScene());
+        }
+        else if (SceneController.m_Instance.m_GameOver)
+        {
+            StartCoroutine(PlayContinueCutScene());
         }
         else
         {
@@ -37,6 +42,10 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// OPを再生し、ActivationPlayer()
+    /// </summary>
+    /// <returns></returns>
     IEnumerator PlayOpeningCutScene()
     {
         m_openingCutScene.gameObject.SetActive(true);
@@ -45,9 +54,24 @@ public class MapManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        m_openingCutScene.gameObject.SetActive(false);
         ActivationPlayer();
+        m_openingCutScene.gameObject.SetActive(false);
+    }
 
+    /// <summary>
+    /// CutSceneを再生し、ActivationPlayer()
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator PlayContinueCutScene()
+    {
+        m_continueCutScene.gameObject.SetActive(true);
+        m_continueCutScene.Play();
+        while (m_continueCutScene.state == PlayState.Playing)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        ActivationPlayer();
+        m_continueCutScene.gameObject.SetActive(false);
     }
 
     /// <summary>

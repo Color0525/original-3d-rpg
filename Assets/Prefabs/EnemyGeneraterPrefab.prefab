@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2652100589695529242}
   - component: {fileID: 2652100589695529241}
+  - component: {fileID: 1681699827}
   m_Layer: 0
-  m_Name: EnemyGenerater
+  m_Name: EnemyGeneraterPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -48,4 +49,18 @@ MonoBehaviour:
   m_instanceNum: 5
   m_generateRange: 20
   m_playerDis: 10
+  m_playerTransform: {fileID: 0}
   m_generated: 0
+--- !u!65 &1681699827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652100589695529243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 5, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}

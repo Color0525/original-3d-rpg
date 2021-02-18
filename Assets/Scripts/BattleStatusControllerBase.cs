@@ -96,15 +96,23 @@ public class BattleStatusControllerBase : MonoBehaviour
         DamageText(this.transform.position + m_offset, power);
         if (m_currentHP == 0)
         {
-            Debug.Log(this.gameObject.name + " Dead");
             m_anim.SetBool("Dead", true);
             m_battleManager.DeleteUnitsList(this);
         }
         else
         {
-            Debug.Log($"{this.gameObject.name} {power}Damage @{m_currentHP}");
             m_anim.SetTrigger("GetHit");
         }
+    }
+
+    /// <summary>
+    /// HPを更新
+    /// </summary>
+    /// <param name="value"></param>
+    void UpdateHP(int value = 0)
+    {
+        m_currentHP = Mathf.Max(m_currentHP + value, 0);
+        m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
     }
 
     /// <summary>
@@ -118,15 +126,5 @@ public class BattleStatusControllerBase : MonoBehaviour
         go.GetComponent<RectTransform>().position = RectTransformUtility.WorldToScreenPoint(Camera.main, unitCanvas);
         go.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
         Destroy(go, 1f);
-    }
-
-    /// <summary>
-    /// HPを更新
-    /// </summary>
-    /// <param name="value"></param>
-    void UpdateHP(int value = 0)
-    {
-        m_currentHP = Mathf.Max(m_currentHP + value, 0);
-        m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
     }
 }

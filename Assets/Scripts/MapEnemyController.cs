@@ -36,21 +36,26 @@ public class MapEnemyController : MonoBehaviour
     /// 止まる最大時間
     /// </summary>
     [SerializeField] float m_maxStopTime = 5f;
-
+    /// <summary>
+    /// 表示するビックリマーク
+    /// </summary>
     [SerializeField] GameObject m_bikkuri;
+
+    /// <summary>
+    /// 制御状態
+    /// </summary>
+    bool m_stop = false;
+    /// <summary>
+    /// 追尾状態
+    /// </summary>
+    bool m_chase = false;
     Vector3 m_dir = Vector3.zero;
     Rigidbody m_rb;
     NavMeshAgent m_nma;
     Animator m_anim;
 
-    /// <summary>
-    /// 追尾状態
-    /// </summary>
-    bool m_chase = false;
-    /// <summary>
-    /// 制御状態
-    /// </summary>
-    bool m_stop = false;
+    
+    
     
 
     // Start is called before the first frame update
