@@ -28,7 +28,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] string m_mapSceneName = "Map";
     [SerializeField] string m_battleSceneName = "Battle";
     [SerializeField] GameObject m_fadePanelPrefab;
-    [SerializeField] float m_fadeSpeed = 1f;
+    [SerializeField] float m_fadeTime = 1f;
     [SerializeField] GameObject m_encountEffectPrefab;
     [SerializeField] GameObject m_slideEffectPrefab;
 
@@ -82,12 +82,12 @@ public class SceneController : MonoBehaviour
     /// <returns></returns>
     IEnumerator LoadMapScene()
     {
-        yield return StartCoroutine(FadeOut(m_fadeSpeed));
+        yield return StartCoroutine(FadeOut(m_fadeTime));
         StartCoroutine(LoadSceneCoroutine(m_mapSceneName));
         //StartCoroutine(FadeIn(m_fadeSpeed));
     }
     //フェードアウト
-    IEnumerator FadeOut(float fadeSpeed = 1f)
+    IEnumerator FadeOut(float fadeTime = 1f)
     {
         GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
         Image fadeImage = go.GetComponent<Image>();
@@ -95,14 +95,14 @@ public class SceneController : MonoBehaviour
         Color currentColor = fadeImage.color;
         while (fadeImage.color.a < 1f)
         {
-            currentColor.a += 1 / fadeSpeed * Time.deltaTime;
+            currentColor.a += 1f / fadeTime * Time.deltaTime;
             fadeImage.color = currentColor;
             yield return null;
         }
-        Destroy(go, fadeSpeed);
+        //Destroy(go);
     }
     //フェードイン
-    public IEnumerator FadeIn(float fadeSpeed = 1f)
+    public IEnumerator FadeIn(float fadeTime = 1f)
     {
         GameObject go = Instantiate(m_fadePanelPrefab, GameObject.FindWithTag("MainCanvas").transform);
         Image fadeImage = go.GetComponent<Image>();
@@ -110,11 +110,11 @@ public class SceneController : MonoBehaviour
         Color currentColor = fadeImage.color;
         while (fadeImage.color.a > 0f)
         {
-            currentColor.a -= 1f / fadeSpeed * Time.deltaTime;
+            currentColor.a -= 1f / fadeTime * Time.deltaTime;
             fadeImage.color = currentColor;
             yield return null;
         }
-        Destroy(go, fadeSpeed);
+        Destroy(go);
     }
     
 

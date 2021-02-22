@@ -9,9 +9,11 @@ using UnityEngine.UI;
 /// </summary>
 public class StatusIconController : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI m_name;
     [SerializeField] Slider m_HPBar;
-    [SerializeField] Slider m_SPBar;
+    [SerializeField] TextMeshProUGUI m_HPValue = null;
+    [SerializeField] Slider m_SPBar = null;
+    [SerializeField] TextMeshProUGUI m_SPValue = null;
+    //[SerializeField] TextMeshProUGUI m_name;
 
     /// <summary>
     /// ステータスアイコンのセットアップ
@@ -21,27 +23,12 @@ public class StatusIconController : MonoBehaviour
     /// <param name="currentHP"></param>
     /// <param name="maxSP"></param>
     /// <param name="currentSP"></param>
-    public void SetupStatus(string name, int maxHP, int currentHP, int maxSP, int currentSP)
+    public void SetupStatus(int maxHP, int currentHP, int maxSP, int currentSP /*, string name*/ )
     {
-        //if (name != null)
-        //{
-            m_name.text = name;
-        //}
-        //else
-        //{
-        //    m_name.gameObject.SetActive(false);
-        //}
-
-        UpdateHPBar(maxHP, currentHP);
-
-        if (maxSP > 0)
-        {
-            UpdateSPBar(maxSP, currentSP);
-        }
-        else
-        {
-            m_SPBar.gameObject.SetActive(false);
-        }
+        UpdateHPBar(maxHP, currentHP);    
+        UpdateSPBar(maxSP, currentSP);
+        
+        //m_name.text = name;
     }
 
     /// <summary>
@@ -52,6 +39,10 @@ public class StatusIconController : MonoBehaviour
     public void UpdateHPBar(int maxHP, int currentHP)
     {
         m_HPBar.value = (float)currentHP / (float)maxHP;
+        if (m_HPValue)
+        {
+            m_HPValue.text = currentHP.ToString();
+        }
     }
 
     /// <summary>
@@ -61,6 +52,13 @@ public class StatusIconController : MonoBehaviour
     /// <param name="currentSP"></param>
     public void UpdateSPBar(int maxSP, int currentSP)
     {
-        m_SPBar.value = (float)currentSP / (float)maxSP;
+        if (m_SPBar)
+        {
+            m_SPBar.value = (float)currentSP / (float)maxSP;
+        }
+        if (m_SPValue)
+        {
+            m_SPValue.text = currentSP.ToString();
+        }
     }
 }

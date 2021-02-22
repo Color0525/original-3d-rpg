@@ -24,7 +24,7 @@ public class MapManager : MonoBehaviour
             Cursor.visible = false;
         }
 
-        SceneController.m_Instance.FadeIn();
+        StartCoroutine(SceneController.m_Instance.FadeIn());
 
         //状態に応じCutScene再生
         if (SceneController.m_Instance.m_NewGame)

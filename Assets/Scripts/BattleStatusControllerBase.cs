@@ -34,7 +34,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         m_battleManager = FindObjectOfType<BattleManager>();
         m_anim = GetComponent<Animator>();
-        m_statusIcon.SetupStatus(m_name, m_maxHP, m_currentHP, m_maxSP, m_currentSP);
+        m_statusIcon.SetupStatus(/*m_name,*/ m_maxHP, m_currentHP, m_maxSP, m_currentSP);
     }
 
     /// <summary>
