@@ -18,10 +18,11 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Transform m_enemyBattlePosition;
     //[SerializeField] GameObject m_statusPanel;
     //[SerializeField] GameObject m_statusIconPrefab;
-    [SerializeField] float m_beginBattleTime = 2f;
     [SerializeField] CinemachineVirtualCamera m_beginBattleCamera;
+    [SerializeField] float m_beginBattleTime = 2f;
     //[SerializeField] Animator m_slideEffectPanel;
     [SerializeField] GameObject m_commandWindow;
+    [SerializeField] Transform m_commandArea;
     [SerializeField] GameObject m_commandButtonPrefab;
     [SerializeField] PlayableDirector m_winCutScene;
     [SerializeField] PlayableDirector m_loseCutScene;
@@ -193,6 +194,7 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(SceneController.m_Instance.SlideEffect());
         yield return new WaitForSeconds(aimTime);
         m_beginBattleCamera.gameObject.SetActive(false);
+        yield return new WaitForSeconds(Camera.main.gameObject.GetComponent<CinemachineBrain>().m_DefaultBlend.BlendTime);
         m_battleState = BattleState.StartTurn;
     }
 
@@ -234,7 +236,7 @@ public class BattleManager : MonoBehaviour
         m_commandWindow.SetActive(true);
         //foreach (var skill in skills)
         //{
-            GameObject go = Instantiate(m_commandButtonPrefab, m_commandWindow.transform);
+            GameObject go = Instantiate(m_commandButtonPrefab, m_commandArea);
             CommandButtonController pcc = go.GetComponent<CommandButtonController>();
         //    pcc.m_skill = skill;
             pcc.m_actor = actor;
@@ -246,7 +248,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EndCommandSelect()
     {
-        foreach (Transform child in m_commandWindow.transform)
+        foreach (Transform child in m_commandArea)
         {
             Destroy(child.gameObject);
         }
