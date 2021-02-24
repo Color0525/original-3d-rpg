@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a184f69f979a9f43bbe989499ae255d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: 
+  m_name: "\u30B9\u30E9\u30A4\u30E0"
   m_maxHP: 50
   m_currentHP: 50
   m_maxSP: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
     type: 3}
   m_DeadParticlePrefab: {fileID: 8030796182266108582, guid: f8fafefb549d9424d94051995a68d80b,
     type: 3}
+  m_questTarget: 0
 --- !u!1001 &4192019529903506024
 PrefabInstance:
   m_ObjectHideFlags: 0

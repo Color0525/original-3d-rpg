@@ -37,7 +37,7 @@ public class BattleManager : MonoBehaviour
     /// 戦うエネミー
     /// </summary>
     [SerializeField] GameObject[] m_enemyPrefabs;
-
+    //プレイヤー、エネミーの戦闘ユニットリスト
     [SerializeField] List<BattlePlayerController> m_playerUnits = new List<BattlePlayerController>();
     [SerializeField] List<BattleEnemyController> m_enemyUnits = new List<BattleEnemyController>();
     /// <summary>
@@ -126,8 +126,16 @@ public class BattleManager : MonoBehaviour
                 {
                     //＜playerステータス引き継ぎ
                     (m_won ? m_winCutScene : m_loseCutScene).Play();
-                    //Instantiate(m_resultTimelinePrefab);//setactiv?
-                    //StartCoroutine(DelayAndUpdateState(0.5f, BattleState.AfterBattle));
+
+                    //クエストのタスクチェック
+                    foreach (var enemyObj in m_enemyPrefabs)
+                    {
+                        if (SceneController.m_Instance.m_CurrentQuest.CheckTarget(enemyObj))
+                        {
+                            SceneController.m_Instance.m_CurrentQuest.AddQuestCount();
+                        }
+                    }
+
                     m_battleState = BattleState.AfterBattle;
                     return;
                 }
@@ -148,11 +156,6 @@ public class BattleManager : MonoBehaviour
                     SceneController.m_Instance.CallLoadMapScene(!m_won);
                     //m_resultCutScene.gameObject.SetActive(false);
                 }
-                ////クリックでMapシーンへ
-                //if (Input.anyKeyDown)
-                //{
-                //    SceneController.m_Instance.CallLoadMapScene();
-                //}
                 break;
 
             default:
@@ -255,30 +258,59 @@ public class BattleManager : MonoBehaviour
         m_commandWindow.SetActive(false);
     }
 
+    ///// <summary>
+    ///// 死亡ユニットを現在戦闘ユニットリストから消し、どちらかの陣営が全滅したならバトル終了状態に
+    ///// </summary>
+    ///// <param name="deadUnit"></param>
+    //public void DeleteUnitsList(BattleStatusControllerBase deadUnit)
+    //{
+    //    m_allUnits.Remove(deadUnit);
+    //    if (deadUnit.gameObject.GetComponent<BattleEnemyController>())
+    //    {
+    //        m_enemyUnits.Remove(deadUnit.gameObject.GetComponent<BattleEnemyController>());
+    //        if (m_enemyUnits.Count == 0)
+    //        {
+    //            m_inBattle = false;
+    //            m_won = true;
+    //        }
+    //    }
+    //    else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
+    //    {
+    //        m_playerUnits.Remove(deadUnit.gameObject.GetComponent<BattlePlayerController>());
+    //        if (m_playerUnits.Count == 0)
+    //        {
+    //            m_inBattle = false;
+    //            m_won = false;
+    //        }
+    //    }
+    //}
+
     /// <summary>
-    /// 死亡ユニットを現在戦闘ユニットリストから消し、どちらかの陣営が全滅したならバトル終了状態に
+    /// 死亡エネミーを現在戦闘ユニットリストから消し、全滅したなら勝利でバトル終了
     /// </summary>
-    /// <param name="deadUnit"></param>
-    public void DeleteUnitsList(BattleStatusControllerBase deadUnit)
+    /// <param name="deadEnemy"></param>
+    public void DeleteEnemyList(BattleEnemyController deadEnemy)
     {
-        m_allUnits.Remove(deadUnit);
-        if (deadUnit.gameObject.GetComponent<BattleEnemyController>())
+        m_allUnits.Remove(deadEnemy);
+        m_enemyUnits.Remove(deadEnemy);
+        if (m_enemyUnits.Count == 0)
         {
-            m_enemyUnits.Remove(deadUnit.gameObject.GetComponent<BattleEnemyController>());
-            if (m_enemyUnits.Count == 0)
-            {
-                m_inBattle = false;
-                m_won = true;
-            }
+            m_inBattle = false;
+            m_won = true;
         }
-        else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
+    }
+    /// <summary>
+    /// 死亡プレイヤーを現在戦闘ユニットリストから消し、全滅したなら敗北でバトル終了
+    /// </summary>
+    /// <param name="deadPlayer"></param>
+    public void DeletePlayerList(BattlePlayerController deadPlayer)
+    {
+        m_allUnits.Remove(deadPlayer);
+        m_playerUnits.Remove(deadPlayer);
+        if (m_playerUnits.Count == 0)
         {
-            m_playerUnits.Remove(deadUnit.gameObject.GetComponent<BattlePlayerController>());
-            if (m_playerUnits.Count == 0)
-            {
-                m_inBattle = false;
-                m_won = false;
-            }
+            m_inBattle = false;
+            m_won = false;
         }
     }
 

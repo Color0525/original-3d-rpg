@@ -11086,6 +11086,7 @@ MonoBehaviour:
     type: 3}
   m_slideEffectPrefab: {fileID: 8296515179378182391, guid: 6e5d4489a67593540b09684aed8a99c8,
     type: 3}
+  m_initialQuest: {fileID: 11400000, guid: 7f8d941214085094a8e2b2e3b633bd67, type: 2}
 --- !u!1001 &1133903638
 PrefabInstance:
   m_ObjectHideFlags: 0

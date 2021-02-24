@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_power
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4982213979340719755, guid: edcdafc91e0baea4cbd2476524a8d456,
+        type: 3}
+      propertyPath: m_name
+      value: "\u30D3\u30C3\u30B0\u30B9\u30E9\u30A4\u30E0"
+      objectReference: {fileID: 0}
     - target: {fileID: 4993672648434196426, guid: edcdafc91e0baea4cbd2476524a8d456,
         type: 3}
       propertyPath: m_Name

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -9,12 +10,22 @@ using UnityEngine.Playables;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] bool m_hideSystemMouseCursor = false;
+
+    //カットシーン
     [SerializeField] PlayableDirector m_openingCutScene;
     [SerializeField] PlayableDirector m_continueCutScene;
+
+    //プレイヤー
     [SerializeField] GameObject m_mapPlayer;
     [SerializeField] GameObject m_mainVirtualCamera;
 
-    //public bool m_newGame { get; private set; } = false;
+    //UI
+    [SerializeField] GameObject m_UI;
+    [SerializeField] TextMeshProUGUI m_questTaskText;
+
+    [SerializeField] StatusIconController a;
+    [SerializeField] QuestData b;
+
 
     void Start()
     {
@@ -38,7 +49,7 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            ActivationPlayer();
+            Activation();
         }
     }
 
@@ -54,7 +65,7 @@ public class MapManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        ActivationPlayer();
+        Activation();
         m_openingCutScene.gameObject.SetActive(false);
     }
 
@@ -70,17 +81,19 @@ public class MapManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        ActivationPlayer();
+        Activation();
         m_continueCutScene.gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// PlayerとメインバーチャルカメラをActiveにする
+    /// Playerとメインバーチャルカメラ、UIをActiveにする
     /// </summary>
-    void ActivationPlayer()
+    void Activation()
     {
         m_mapPlayer.SetActive(true);
         m_mainVirtualCamera.SetActive(true);
+        m_UI.SetActive(true);
+        m_questTaskText.text = SceneController.m_Instance.m_CurrentQuest.QuestTaskText();
     }
 
     /// <summary>

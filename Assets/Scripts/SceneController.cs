@@ -22,8 +22,12 @@ public class SceneController : MonoBehaviour
     public Vector3 m_PlayerMapPosition { get; private set; } = Vector3.zero;
     public Quaternion m_PlayerMapRotation { get; private set; } = Quaternion.identity;
 
+    //Gameフラグ
     public bool m_NewGame { get; private set; } = false;
     public bool m_GameOver { get; private set; } = false;
+
+    //現在のクエスト
+    public QuestData m_CurrentQuest { get; private set; }
 
     [SerializeField] string m_mapSceneName = "Map";
     [SerializeField] string m_battleSceneName = "Battle";
@@ -31,6 +35,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] float m_fadeTime = 1f;
     [SerializeField] GameObject m_encountEffectPrefab;
     [SerializeField] GameObject m_slideEffectPrefab;
+    [SerializeField] QuestData m_initialQuest;
 
     void Awake()
     {
@@ -43,7 +48,19 @@ public class SceneController : MonoBehaviour
         {
             m_Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            //初期クエストをセット
+            SetQuest(m_initialQuest);
         }
+    }
+
+    /// <summary>
+    /// クエストをセット
+    /// </summary>
+    /// <param name="quest"></param>
+    void SetQuest(QuestData quest)
+    {
+        m_CurrentQuest = quest;
     }
 
     /// <summary>
@@ -169,6 +186,7 @@ public class SceneController : MonoBehaviour
         }
         Destroy(go);
     }
+
     //コルーチンとしてSceneを読み込む
     IEnumerator LoadSceneCoroutine(string sceneName)
     {

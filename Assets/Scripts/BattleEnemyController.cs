@@ -8,6 +8,7 @@ using UnityEngine;
 public class BattleEnemyController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_DeadParticlePrefab;
+    [SerializeField] bool m_questTarget = false;
 
     /// <summary>
     /// 行動(敵)
@@ -27,9 +28,17 @@ public class BattleEnemyController : BattleStatusControllerBase
         SetTriggerAnimator("Attack");//(m_currentSkill.m_animation.neme)
     }
 
-    /// <summary>
-    /// アニメイベントAttack()
-    /// </summary>
+    //public override void Death(BattleStatusControllerBase deadUnit)
+    //{
+    //    base.Death(deadUnit);
+    //    if (m_questTarget)
+    //    {
+    //        SceneController.m_Instance.AddQuestCount();
+    //    }
+    //}
+
+
+    // アニメイベント
     public override void Hit()
     {
         base.Hit();

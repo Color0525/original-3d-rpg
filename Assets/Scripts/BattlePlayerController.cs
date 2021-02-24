@@ -48,9 +48,7 @@ public class BattlePlayerController : BattleStatusControllerBase
         SetTriggerAnimator("Attack");//(m_currentSkill.m_animation.neme)
     }
 
-    /// <summary>
-    /// アニメイベントAttack()
-    /// </summary>
+    // アニメイベント    
     public override void Hit()
     {
         base.Hit();

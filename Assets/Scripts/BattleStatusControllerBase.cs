@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class BattleStatusControllerBase : MonoBehaviour
 {
-    [SerializeField] string m_name = null;
+    public string m_name = null;
     [SerializeField] int m_maxHP = 10;
     [SerializeField] int m_currentHP = 10;
     [SerializeField] int m_maxSP = 0;
@@ -69,11 +69,11 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         m_anim.SetTrigger(animName);
     }
-    public virtual void Hit()/// Attackアニメイベント 
+    public virtual void Hit()// Attackアニメイベント 
     {
-        Debug.Log(this.gameObject.name + " Attack");
+        //Debug.Log(this.gameObject.name + " Attack");
     }
-    void End()
+    void End()//Attackアニメイベント 
     {
         EndAction();
     }
@@ -97,11 +97,27 @@ public class BattleStatusControllerBase : MonoBehaviour
         if (m_currentHP == 0)
         {
             m_anim.SetBool("Dead", true);
-            m_battleManager.DeleteUnitsList(this);
+            Death(this);
         }
         else
         {
             m_anim.SetTrigger("GetHit");
+        }
+    }
+
+    /// <summary>
+    /// 死亡する
+    /// </summary>
+    /// <param name="deadUnit"></param>
+    public virtual void Death(BattleStatusControllerBase deadUnit)
+    {
+        if (deadUnit.gameObject.GetComponent<BattleEnemyController>())
+        {
+            m_battleManager.DeleteEnemyList(deadUnit.gameObject.GetComponent<BattleEnemyController>());
+        }
+        else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
+        {
+            m_battleManager.DeletePlayerList(deadUnit.gameObject.GetComponent<BattlePlayerController>());
         }
     }
 
