@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: e11f5b66aad75483b8cd16ee18a0c917, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657916, g: 0.4964139, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.5992311, g: 0.82076895, b: 0.94166243, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4263,8 +4263,7 @@ MonoBehaviour:
   m_text: "\u30DC\u30A6\u30B1\u30F3\n\u30CE\n\u30CF\u30B8\u30DE\u30EA"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07c7e06e541ccaa42bae50ad19af2794, type: 2}
-  m_sharedMaterial: {fileID: -2902621088759056218, guid: 07c7e06e541ccaa42bae50ad19af2794,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4b3e3bea8a7e4e747b36e4541257d3dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5229,7 +5228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &720106615
 Transform:
   m_ObjectHideFlags: 0
@@ -7526,8 +7525,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076368375}
-  m_LocalRotation: {x: 0.016311323, y: 0.98051333, z: -0.09277043, w: 0.17239842}
-  m_LocalPosition: {x: -2.5320191, y: -0.8657726, z: 3.3730235}
+  m_LocalRotation: {x: 0.027949808, y: 0.9303711, z: -0.07258032, w: 0.3582745}
+  m_LocalPosition: {x: -1.41, y: -1.8, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1587857477}
@@ -11294,8 +11293,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550272206}
-  m_LocalRotation: {x: 0.016311323, y: 0.98051333, z: -0.09277043, w: 0.17239842}
-  m_LocalPosition: {x: -2.5320191, y: -0.8657726, z: 3.3730235}
+  m_LocalRotation: {x: 0.027949808, y: 0.9303711, z: -0.07258032, w: 0.3582745}
+  m_LocalPosition: {x: -1.41, y: -1.8, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11733,7 +11732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1677763390}
-  m_PathPosition: 35.13388
+  m_PathPosition: 0
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -15498,8 +15497,7 @@ MonoBehaviour:
   m_text: "\u30CF\u30B8\u30E1\u30EB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 07c7e06e541ccaa42bae50ad19af2794, type: 2}
-  m_sharedMaterial: {fileID: -2902621088759056218, guid: 07c7e06e541ccaa42bae50ad19af2794,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4b3e3bea8a7e4e747b36e4541257d3dc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

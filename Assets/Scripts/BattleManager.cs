@@ -269,7 +269,6 @@ public class BattleManager : MonoBehaviour
             {
                 m_inBattle = false;
                 m_won = true;
-                //m_ResultCutScene = m_winCutScene;
             }
         }
         else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
@@ -279,7 +278,6 @@ public class BattleManager : MonoBehaviour
             {
                 m_inBattle = false;
                 m_won = false;
-                //m_ResultCutScene = m_loseCutScene;
             }
         }
     }
