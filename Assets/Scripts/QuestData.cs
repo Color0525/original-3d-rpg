@@ -20,9 +20,14 @@ public class QuestData : ScriptableObject
     /// <returns></returns>
     public string QuestTaskText()
     {
-        return $"{m_target.GetComponent<BattleStatusControllerBase>().m_name}を{m_taskValue}体倒す {m_taskCount} / {m_taskValue}";
+        return $"{m_target.GetComponent<BattleStatusControllerBase>().m_name}を{m_taskValue}体倒す {m_taskCount}/{m_taskValue}";
     }
 
+    /// <summary>
+    /// ターゲットが合っているかチェック
+    /// </summary>
+    /// <param name="enemyObject"></param>
+    /// <returns></returns>
     public bool CheckTarget(GameObject enemyObject)
     {
         return enemyObject == m_target ? true : false; 

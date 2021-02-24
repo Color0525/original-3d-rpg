@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eef254fe318d4d46a964101446f21de, type: 3}
   m_Name: KillBigSlimeQuest
   m_EditorClassIdentifier: 
-  m_target: {fileID: 4993672648434196426, guid: edcdafc91e0baea4cbd2476524a8d456,
+  m_target: {fileID: 4375224791195816608, guid: c664c7e635c405642bf72919c909ed66,
     type: 3}
   m_taskValue: 1
-  m_taskCount: 0
+  m_taskCount: 1
