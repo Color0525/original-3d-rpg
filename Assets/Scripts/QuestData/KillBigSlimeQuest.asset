@@ -15,4 +15,3 @@ MonoBehaviour:
   m_target: {fileID: 4375224791195816608, guid: c664c7e635c405642bf72919c909ed66,
     type: 3}
   m_taskValue: 1
-  m_taskCount: 1

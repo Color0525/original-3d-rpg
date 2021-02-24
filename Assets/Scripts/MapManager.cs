@@ -23,10 +23,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] GameObject m_UI;
     [SerializeField] TextMeshProUGUI m_questTaskText;
 
-    [SerializeField] StatusIconController a;
-    [SerializeField] QuestData b;
-
-
     void Start()
     {
         //マウスカーソル非表示
@@ -86,14 +82,27 @@ public class MapManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Playerとメインバーチャルカメラ、UIをActiveにする
+    /// Playerとメインバーチャルカメラ、UIをActiveにし、クエスト表示する
     /// </summary>
     void Activation()
     {
         m_mapPlayer.SetActive(true);
         m_mainVirtualCamera.SetActive(true);
         m_UI.SetActive(true);
-        m_questTaskText.text = SceneController.m_Instance.m_CurrentQuest.QuestTaskText();
+
+        if (SceneController.m_Instance.m_CurrentQuest)
+        {
+            m_questTaskText.text = SceneController.m_Instance.m_CurrentQuest.QuestTaskText();
+            if (SceneController.m_Instance.m_CurrentQuest.m_Clear)
+            {
+                m_questTaskText.gameObject.GetComponent<Animator>().Play("Clear");
+            }
+        }
+        else
+        {
+            m_questTaskText.text = "クエストなし";
+            m_questTaskText.gameObject.GetComponent<Animator>().Play("None");
+        }
     }
 
     /// <summary>

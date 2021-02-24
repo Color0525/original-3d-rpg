@@ -50,7 +50,10 @@ public class SceneController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             //初期クエストをセット
-            SetQuest(m_initialQuest);
+            if (m_initialQuest)
+            {
+                SetQuest(m_initialQuest);
+            }
         }
     }
 
@@ -60,6 +63,7 @@ public class SceneController : MonoBehaviour
     /// <param name="quest"></param>
     void SetQuest(QuestData quest)
     {
+        quest.Reset();
         m_CurrentQuest = quest;
     }
 

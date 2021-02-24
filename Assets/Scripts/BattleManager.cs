@@ -128,14 +128,17 @@ public class BattleManager : MonoBehaviour
                     (m_won ? m_winCutScene : m_loseCutScene).Play();
 
                     //クエストのタスクチェック
-                    foreach (var enemyObj in m_enemyPrefabs)
+                    if (SceneController.m_Instance.m_CurrentQuest)
                     {
-                        if (SceneController.m_Instance.m_CurrentQuest.CheckTarget(enemyObj))
+                        foreach (var enemyObj in m_enemyPrefabs)
                         {
-                            SceneController.m_Instance.m_CurrentQuest.AddQuestCount();
+                            if (SceneController.m_Instance.m_CurrentQuest.CheckTarget(enemyObj))
+                            {
+                                SceneController.m_Instance.m_CurrentQuest.AddQuestCount();
+                            }
                         }
                     }
-
+                    
                     m_battleState = BattleState.AfterBattle;
                     return;
                 }

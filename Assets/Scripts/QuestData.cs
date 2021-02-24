@@ -8,8 +8,17 @@ public class QuestData : ScriptableObject
     //[SerializeField] string m_QuestTaskText;
     [SerializeField] GameObject m_target = null;
     [SerializeField] int m_taskValue = 1;
-    [SerializeField] int m_taskCount = 0;
+    int m_taskCount = 0;
     public bool m_Clear { get; private set; } = false;
+
+    /// <summary>
+    /// リセットする
+    /// </summary>
+    public void Reset()
+    {
+        m_taskCount = 0;
+        m_Clear = false;
+    }
 
     /// <summary>
     /// クエストのタスクテキストを返す
