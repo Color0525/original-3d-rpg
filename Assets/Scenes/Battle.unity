@@ -8193,14 +8193,15 @@ MonoBehaviour:
   m_commandButtonPrefab: {fileID: 4596506479027596017, guid: a52f2eb1254751c41b196600e872417e,
     type: 3}
   m_commandInfoText: {fileID: 1728019765}
+  m_ActionTextPrefab: {fileID: 6233094090628478389, guid: 80fc31acf8e02954db089f1c1bf1f19d,
+    type: 3}
   m_winCutScene: {fileID: 6092280810836648712}
   m_loseCutScene: {fileID: 1019072332}
   m_delayAtEndTurn: 0.75
-  skill: {fileID: 0}
   m_playerPrefabs:
   - {fileID: 6668329273356992691, guid: d6468af2619692944aa0747b2c2d61f2, type: 3}
   m_enemyPrefabs:
-  - {fileID: 4993672648434196426, guid: edcdafc91e0baea4cbd2476524a8d456, type: 3}
+  - {fileID: 4375224791195816608, guid: c664c7e635c405642bf72919c909ed66, type: 3}
   m_playerUnits: []
   m_enemyUnits: []
   m_allUnits: []
@@ -15636,8 +15637,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.25476, y: -7.1134973}
-  m_SizeDelta: {x: 200, y: 300}
+  m_AnchoredPosition: {x: -118, y: -34}
+  m_SizeDelta: {x: 225, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1725291695
 MonoBehaviour:
@@ -15735,8 +15736,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.650604, y: -251.32228}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: -92, y: -244}
+  m_SizeDelta: {x: 325, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728019765
 MonoBehaviour:
@@ -15785,8 +15786,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17669,8 +17670,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -27,7 +27,7 @@ public class BattleEnemyController : BattleStatusControllerBase
         //持っているスキルからランダムに使用
         m_CurrentSkill = m_HavesSkills[Random.Range(0, m_HavesSkills.Length)];
         //UseSP(m_CurrentSkill.m_CostSP); // 敵はSP消費なし
-        PlayStateAnimator(m_CurrentSkill.m_StateName);
+        PlayStateAnimator(m_CurrentSkill);
     }
 
     //public override void Death(BattleStatusControllerBase deadUnit)

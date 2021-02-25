@@ -57,7 +57,7 @@ public class CommandButtonController : MonoBehaviour
         }
         else
         {
-            Debug.Log("SPが足りません。");
+            FindObjectOfType<BattleManager>().ActionText("SPが足りない！");
         }
     }
 }

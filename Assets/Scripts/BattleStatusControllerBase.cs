@@ -75,12 +75,13 @@ public class BattleStatusControllerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 指定したステート名をプレイ
+    /// 指定したスキルのステートをプレイ
     /// </summary>
     /// <param name="sutateName"></param>
-    public void PlayStateAnimator(string sutateName)
+    public void PlayStateAnimator(SkillData skill)
     {
-        m_anim.Play(sutateName);
+        m_battleManager.ActionText(skill.m_SkillName);
+        m_anim.Play(skill.m_StateName);
     }
     public virtual void Hit(BattleStatusControllerBase target = null)// Attackアニメイベント 
     {

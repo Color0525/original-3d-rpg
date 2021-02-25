@@ -20,18 +20,17 @@ public class BattleManager : MonoBehaviour
     //開始演出
     [SerializeField] CinemachineVirtualCamera m_beginBattleCamera;
     [SerializeField] float m_beginBattleTime = 2f;
-    //コマンドウィンドウ
+    //UI
     [SerializeField] GameObject m_commandWindow;
     [SerializeField] Transform m_commandArea;
     [SerializeField] GameObject m_commandButtonPrefab;
     [SerializeField] TextMeshProUGUI m_commandInfoText;
+    [SerializeField] GameObject m_ActionTextPrefab;
     //カットシーン
     [SerializeField] PlayableDirector m_winCutScene;
     [SerializeField] PlayableDirector m_loseCutScene;
     //ディレイ
     [SerializeField] float m_delayAtEndTurn = 1f;
-
-    public SkillData skill;
 
     /// <summary>
     ///戦うプレイヤー
@@ -129,18 +128,26 @@ public class BattleManager : MonoBehaviour
                 if (!m_inBattle)
                 {
                     //＜playerステータス引き継ぎ
-                    (m_won ? m_winCutScene : m_loseCutScene).Play();
 
-                    //クエストのタスクチェック
-                    if (SceneController.m_Instance.m_CurrentQuest)
+                    if (m_won)
                     {
-                        foreach (var enemyObj in m_enemyPrefabs)
+                        //クエストのタスクチェック
+                        if (SceneController.m_Instance.m_CurrentQuest)
                         {
-                            if (SceneController.m_Instance.m_CurrentQuest.CheckTarget(enemyObj))
+                            foreach (var enemyObj in m_enemyPrefabs)
                             {
-                                SceneController.m_Instance.m_CurrentQuest.AddQuestCount();
+                                if (SceneController.m_Instance.m_CurrentQuest.CheckTarget(enemyObj))
+                                {
+                                    SceneController.m_Instance.m_CurrentQuest.AddQuestCount();
+                                }
                             }
                         }
+
+                        m_winCutScene.Play();
+                    }
+                    else
+                    {
+                        m_loseCutScene.Play();
                     }
                     
                     m_battleState = BattleState.AfterBattle;
@@ -317,6 +324,17 @@ public class BattleManager : MonoBehaviour
             m_inBattle = false;
             m_won = false;
         }
+    }
+
+    /// <summary>
+    /// ActionTextを出す
+    /// </summary>
+    /// <param name="actionText"></param>
+    public void ActionText(string actionText)
+    {
+        GameObject go = Instantiate(m_ActionTextPrefab, GameObject.FindWithTag("MainCanvas").transform);
+        go.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
+        Destroy(go, 1f);
     }
 
     /// <summary>

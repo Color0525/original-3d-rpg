@@ -38,7 +38,7 @@ public class BattlePlayerController : BattleStatusControllerBase
         {
             m_fireSword.Play();
         }
-        PlayStateAnimator(m_CurrentSkill.m_StateName);
+        PlayStateAnimator(m_CurrentSkill);
     }
 
     // アニメイベント    

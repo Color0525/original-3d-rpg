@@ -17,6 +17,6 @@ MonoBehaviour:
   m_costSP: 4
   m_powerRate: 1
   m_stateName: LastBurning
-  m_hitEffectPrefab: {fileID: 1828176872806910, guid: b964d653650f84544bdd79dd7e01a50d,
+  m_hitEffectPrefab: {fileID: 1134129239631916, guid: 476904657b767094d9c4fe2f21dd4bd6,
     type: 3}
   m_fireEffect: 1
