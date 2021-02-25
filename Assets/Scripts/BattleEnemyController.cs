@@ -24,8 +24,10 @@ public class BattleEnemyController : BattleStatusControllerBase
     /// </summary>
     void EnemyAction()
     {
-        //m_currentSkill = Random.Range(m_skills);
-        SetTriggerAnimator("Attack");//(m_currentSkill.m_animation.neme)
+        //持っているスキルからランダムに使用
+        m_CurrentSkill = m_HavesSkills[Random.Range(0, m_HavesSkills.Length)];
+        //UseSP(m_CurrentSkill.m_CostSP); // 敵はSP消費なし
+        PlayStateAnimator(m_CurrentSkill.m_StateName);
     }
 
     //public override void Death(BattleStatusControllerBase deadUnit)
@@ -37,12 +39,11 @@ public class BattleEnemyController : BattleStatusControllerBase
     //    }
     //}
 
-
     // アニメイベント
     public override void Hit()
     {
         base.Hit();
-        Attack(FindObjectOfType<BattlePlayerController>());//(BEC, m_currentSkill.m_power)
+        Attack(FindObjectOfType<BattlePlayerController>(), m_CurrentSkill.GetPowerRate(this));
     }
 
     void Dead()

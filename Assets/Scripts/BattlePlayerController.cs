@@ -8,7 +8,6 @@ using UnityEngine;
 public class BattlePlayerController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_statusIconPrefab;
-    //[SerializeField] GameObject m_slideEffectPrefab;
 
     void Awake()
     {
@@ -23,35 +22,24 @@ public class BattlePlayerController : BattleStatusControllerBase
     public override void StartAction()
     {
         base.StartAction();
-        m_battleManager.StartCommandSelect(this);
-        //StartCoroutine(StartCommandSelectDirecting());
+        m_battleManager.StartCommandSelect(m_HavesSkills, this);
     }
-    //IEnumerator StartCommandSelectDirecting()
-    //{
-    //    GameObject go = Instantiate(m_slideEffectPrefab, GameObject.FindWithTag("MainCanvas").transform);
-    //    Animator anim = go.GetComponent<Animator>();
-    //    while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
-    //    {
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //    Destroy(go);
-    //    m_battleManager.StartCommandSelect(this);
-    //}
 
     /// <summary>
     /// 行動コマンド(Player)
     /// </summary>
-    public void PlayerActionCommand()//(Skill skill)
+    public void PlayerActionCommand(SkillData skill)
     {
         m_battleManager.EndCommandSelect();
-        //m_currentSkill = skill;
-        SetTriggerAnimator("Attack");//(m_currentSkill.m_animation.neme)
+        m_CurrentSkill = skill;
+        UseSP(m_CurrentSkill.m_CostSP);
+        PlayStateAnimator(m_CurrentSkill.m_StateName);
     }
 
     // アニメイベント    
     public override void Hit()
     {
         base.Hit();
-        Attack(FindObjectOfType<BattleEnemyController>());//(BEC, m_currentSkill.m_power)
+        Attack(FindObjectOfType<BattleEnemyController>(), m_CurrentSkill.GetPowerRate(this));
     }
 }

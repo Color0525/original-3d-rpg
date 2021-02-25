@@ -553,6 +553,8 @@ MonoBehaviour:
   m_maxSP: 10
   m_currentSP: 10
   m_power: 50
+  m_havesSkills:
+  - {fileID: 11400000, guid: e7b3d4597b74b3241b83a4876067f92e, type: 2}
   m_statusIcon: {fileID: 0}
   m_offset: {x: 0, y: 1, z: 0}
   m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,

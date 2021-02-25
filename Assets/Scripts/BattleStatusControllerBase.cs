@@ -8,22 +8,34 @@ using UnityEngine;
 /// </summary>
 public class BattleStatusControllerBase : MonoBehaviour
 {
-    public string m_name = null;
+    //ステータス
+    [SerializeField] string m_name;
     [SerializeField] int m_maxHP = 10;
     [SerializeField] int m_currentHP = 10;
     [SerializeField] int m_maxSP = 0;
     [SerializeField] int m_currentSP = 0;
     [SerializeField] int m_power = 3;
+    //スキル
+    [SerializeField] SkillData[] m_havesSkills;
+    SkillData m_currentSkill;
+    //アイコン等
     [SerializeField] StatusIconController m_statusIcon;
     [SerializeField] Vector3 m_offset;
     [SerializeField] GameObject m_damageTextPrefab;
-    //public bool m_InAction { get; private set; } = false;
-    //public bool m_InAnimation { get; private set; } = false;
-    //Skill[] m_skills;
-    //Slill m_currentSkill;
+    
     Animator m_anim;
 
     public static BattleManager m_battleManager;
+
+    //プロパティ
+    public string m_Name { get { return m_name; } private set { m_name = value; } }
+    public int m_MaxHP { get { return m_maxHP; } private set { m_maxHP = value; } }
+    public int m_CurrentHP { get { return m_currentHP; } private set { m_currentHP = value; } }
+    public int m_MaxSP { get { return m_maxSP; } private set { m_maxSP = value; } }
+    public int m_CurrentSP { get { return m_currentSP; } private set { m_currentSP = value; } }
+    public int m_Power { get { return m_power; } private set { m_power = value; } }
+    public SkillData[] m_HavesSkills { get { return m_havesSkills; } private set { m_havesSkills = value; } }
+    public SkillData m_CurrentSkill { get { return m_currentSkill; } set { m_currentSkill = value; } }
 
     //private void Awake()//StartBattle前のstate実装後Start()に戻す
     //{
@@ -62,12 +74,12 @@ public class BattleStatusControllerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// AnimatorのSetTriggerをセット（Animationにする？）
+    /// 指定したステート名をプレイ
     /// </summary>
-    /// <param name="animName"></param>
-    public void SetTriggerAnimator(string animName)
+    /// <param name="sutateName"></param>
+    public void PlayStateAnimator(string sutateName)
     {
-        m_anim.SetTrigger(animName);
+        m_anim.Play(sutateName);
     }
     public virtual void Hit()// Attackアニメイベント 
     {
@@ -82,18 +94,21 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// ダメージを与える
     /// </summary>
     /// <param name="target"></param>
-    public void Attack(BattleStatusControllerBase target)
+    public void Attack(BattleStatusControllerBase target, float powerRate)
     {
-        target.Damage(m_power);
+        target.Damage(m_power * powerRate);
     }
+
     /// <summary>
     /// ダメージを受ける
     /// </summary>
     /// <param name="power"></param>
-    void Damage(int power)
+    void Damage(float power)
     {
-        UpdateHP(-power);
-        DamageText(this.transform.position + m_offset, power);
+        int finalDamage = Mathf.CeilToInt(power);
+        UpdateHP(-finalDamage);
+        DamageText(this.transform.position + m_offset, finalDamage);
+
         if (m_currentHP == 0)
         {
             m_anim.SetBool("Dead", true);
@@ -121,14 +136,29 @@ public class BattleStatusControllerBase : MonoBehaviour
         }
     }
 
+    public void UseSP(int cost)
+    {
+        UpdateSP(-cost);
+    }
+
     /// <summary>
     /// HPを更新
     /// </summary>
     /// <param name="value"></param>
     void UpdateHP(int value = 0)
     {
-        m_currentHP = Mathf.Max(m_currentHP + value, 0);
+        m_currentHP = Mathf.Clamp(m_currentHP + value, 0, m_maxHP);
         m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
+    }
+
+    /// <summary>
+    /// SPを更新
+    /// </summary>
+    /// <param name="value"></param>
+    void UpdateSP(int value = 0)
+    {
+        m_currentSP = Mathf.Clamp(m_currentSP + value, 0, m_maxSP);
+        m_statusIcon.UpdateSPBar(m_maxSP, m_currentSP);
     }
 
     /// <summary>

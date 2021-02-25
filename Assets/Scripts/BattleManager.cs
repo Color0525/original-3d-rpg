@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -13,21 +14,24 @@ public class BattleManager : MonoBehaviour
     /// 現在の戦闘状態
     /// </summary>
     [SerializeField] BattleState m_battleState = BattleState.BeginBattle;
-
+    //ユニットの位置
     [SerializeField] Transform m_playerBattlePosition;
     [SerializeField] Transform m_enemyBattlePosition;
-    //[SerializeField] GameObject m_statusPanel;
-    //[SerializeField] GameObject m_statusIconPrefab;
+    //開始演出
     [SerializeField] CinemachineVirtualCamera m_beginBattleCamera;
     [SerializeField] float m_beginBattleTime = 2f;
-    //[SerializeField] Animator m_slideEffectPanel;
+    //コマンドウィンドウ
     [SerializeField] GameObject m_commandWindow;
     [SerializeField] Transform m_commandArea;
     [SerializeField] GameObject m_commandButtonPrefab;
+    [SerializeField] TextMeshProUGUI m_commandInfoText;
+    //カットシーン
     [SerializeField] PlayableDirector m_winCutScene;
     [SerializeField] PlayableDirector m_loseCutScene;
-    //PlayableDirector m_ResultCutScene;
+    //ディレイ
     [SerializeField] float m_delayAtEndTurn = 1f;
+
+    public SkillData skill;
 
     /// <summary>
     ///戦うプレイヤー
@@ -237,16 +241,14 @@ public class BattleManager : MonoBehaviour
     /// コマンドセレクトを開始する
     /// </summary>
     /// <param name="actor"></param>
-    public void StartCommandSelect(BattlePlayerController actor)//(Skill[] skills, BPC bpc)
+    public void StartCommandSelect(SkillData[] skills, BattlePlayerController actor)
     {
         m_commandWindow.SetActive(true);
-        //foreach (var skill in skills)
-        //{
+        foreach (var skill in skills)
+        {
             GameObject go = Instantiate(m_commandButtonPrefab, m_commandArea);
-            CommandButtonController pcc = go.GetComponent<CommandButtonController>();
-        //    pcc.m_skill = skill;
-            pcc.m_actor = actor;
-        //}
+            go.GetComponent<CommandButtonController>().SetupCammand(skill, actor, m_commandInfoText);
+        }
     }
 
     /// <summary>

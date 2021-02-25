@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu()]
+/// <summary>
+/// クエストデータ
+/// </summary>
+[CreateAssetMenu(fileName = "NewQuestData", menuName = "CreateQuestData")]
 public class QuestData : ScriptableObject
 {
     //[SerializeField] string m_QuestTaskText;
@@ -29,7 +32,7 @@ public class QuestData : ScriptableObject
     /// <returns></returns>
     public string QuestTaskText()
     {
-        return $"{m_target.GetComponent<BattleStatusControllerBase>().m_name}を{m_taskValue}体倒す {m_taskCount}/{m_taskValue}";
+        return $"{m_target.GetComponent<BattleStatusControllerBase>().m_Name}を{m_taskValue}体倒す {m_taskCount}/{m_taskValue}";
     }
 
     /// <summary>
