@@ -20,7 +20,8 @@ public class BattleStatusControllerBase : MonoBehaviour
     SkillData m_currentSkill;
     //アイコン等
     [SerializeField] StatusIconController m_statusIcon;
-    [SerializeField] Vector3 m_offset;
+    [SerializeField] Transform m_hitParticlePosition;
+    [SerializeField] Transform m_damageTextPosition;
     [SerializeField] GameObject m_damageTextPrefab;
     
     Animator m_anim;
@@ -81,9 +82,13 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         m_anim.Play(sutateName);
     }
-    public virtual void Hit()// Attackアニメイベント 
+    public virtual void Hit(BattleStatusControllerBase target = null)// Attackアニメイベント 
     {
-        //Debug.Log(this.gameObject.name + " Attack");
+        if (target)
+        {
+            Instantiate(m_CurrentSkill.m_HitEffectPrefab, target.m_hitParticlePosition.position, m_CurrentSkill.m_HitEffectPrefab.transform.rotation);
+            Attack(target, m_CurrentSkill.GetPowerRate(this));
+        }
     }
     void End()//Attackアニメイベント 
     {
@@ -107,7 +112,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         int finalDamage = Mathf.CeilToInt(power);
         UpdateHP(-finalDamage);
-        DamageText(this.transform.position + m_offset, finalDamage);
+        DamageText(m_damageTextPosition.position, finalDamage);
 
         if (m_currentHP == 0)
         {

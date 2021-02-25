@@ -119,6 +119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4982213979340719755, guid: edcdafc91e0baea4cbd2476524a8d456,
         type: 3}
+      propertyPath: m_havesSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982213979340719755, guid: edcdafc91e0baea4cbd2476524a8d456,
+        type: 3}
       propertyPath: m_maxHP
       value: 200
       objectReference: {fileID: 0}
@@ -137,6 +142,12 @@ PrefabInstance:
       propertyPath: m_name
       value: "\u30D3\u30C3\u30B0\u30B9\u30E9\u30A4\u30E0"
       objectReference: {fileID: 0}
+    - target: {fileID: 4982213979340719755, guid: edcdafc91e0baea4cbd2476524a8d456,
+        type: 3}
+      propertyPath: m_havesSkills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e7b3d4597b74b3241b83a4876067f92e,
+        type: 2}
     - target: {fileID: 4993672648434196426, guid: edcdafc91e0baea4cbd2476524a8d456,
         type: 3}
       propertyPath: m_Name
@@ -151,6 +162,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274321756026501440, guid: edcdafc91e0baea4cbd2476524a8d456,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edcdafc91e0baea4cbd2476524a8d456, type: 3}

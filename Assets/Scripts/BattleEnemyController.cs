@@ -40,10 +40,12 @@ public class BattleEnemyController : BattleStatusControllerBase
     //}
 
     // アニメイベント
-    public override void Hit()
+    public override void Hit(BattleStatusControllerBase target = null)
     {
-        base.Hit();
-        Attack(FindObjectOfType<BattlePlayerController>(), m_CurrentSkill.GetPowerRate(this));
+        BattlePlayerController thisTarget = FindObjectOfType<BattlePlayerController>();
+        base.Hit(thisTarget); 
+        //Instantiate(m_CurrentSkill.m_HitEffectPrefab, target.transform.position, target.transform.rotation);
+        //Attack(target, m_CurrentSkill.GetPowerRate(this));
     }
 
     void Dead()

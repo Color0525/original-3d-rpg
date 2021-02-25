@@ -8,6 +8,7 @@ using UnityEngine;
 public class BattlePlayerController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_statusIconPrefab;
+    [SerializeField] ParticleSystem m_fireSword;
 
     void Awake()
     {
@@ -33,13 +34,25 @@ public class BattlePlayerController : BattleStatusControllerBase
         m_battleManager.EndCommandSelect();
         m_CurrentSkill = skill;
         UseSP(m_CurrentSkill.m_CostSP);
+        if (m_CurrentSkill.m_FireEffect)
+        {
+            m_fireSword.Play();
+        }
         PlayStateAnimator(m_CurrentSkill.m_StateName);
     }
 
     // アニメイベント    
-    public override void Hit()
+    public override void Hit(BattleStatusControllerBase target = null)
     {
-        base.Hit();
-        Attack(FindObjectOfType<BattleEnemyController>(), m_CurrentSkill.GetPowerRate(this));
+        BattleStatusControllerBase thisTarget = FindObjectOfType<BattleEnemyController>();
+        base.Hit(thisTarget);
+        //Instantiate(m_CurrentSkill.m_HitEffectPrefab, target.transform.position, target.transform.rotation);
+        //Attack(target, m_CurrentSkill.GetPowerRate(this));
+
+        if (m_CurrentSkill.m_FireEffect)
+        {
+            m_fireSword.Stop();
+        }
     }
+
 }
