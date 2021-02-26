@@ -230,7 +230,7 @@ MonoBehaviour:
   m_currentHP: 50
   m_maxSP: 0
   m_currentSP: 0
-  m_power: 20
+  m_power: 15
   m_havesSkills:
   - {fileID: 11400000, guid: e7b3d4597b74b3241b83a4876067f92e, type: 2}
   m_statusIcon: {fileID: 5570699625220005001}
@@ -238,11 +238,8 @@ MonoBehaviour:
   m_damageTextPosition: {fileID: 1740394305173110424}
   m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,
     type: 3}
-  m_ActionTextPrefab: {fileID: 6233094090628478389, guid: 80fc31acf8e02954db089f1c1bf1f19d,
-    type: 3}
   m_DeadParticlePrefab: {fileID: 8030796182266108582, guid: f8fafefb549d9424d94051995a68d80b,
     type: 3}
-  m_questTarget: 0
 --- !u!1001 &4192019529903506024
 PrefabInstance:
   m_ObjectHideFlags: 0

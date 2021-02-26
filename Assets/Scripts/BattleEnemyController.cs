@@ -8,7 +8,6 @@ using UnityEngine;
 public class BattleEnemyController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_DeadParticlePrefab;
-    [SerializeField] bool m_questTarget = false;
 
     /// <summary>
     /// 行動(敵)
