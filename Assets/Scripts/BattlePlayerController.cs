@@ -8,7 +8,7 @@ using UnityEngine;
 public class BattlePlayerController : BattleStatusControllerBase
 {
     [SerializeField] GameObject m_statusIconPrefab;
-    [SerializeField] ParticleSystem m_fireSword;
+    [SerializeField] ParticleSystem m_fireSwordParticle;
 
     void Awake()
     {
@@ -36,7 +36,7 @@ public class BattlePlayerController : BattleStatusControllerBase
         UseSP(m_CurrentSkill.m_CostSP);
         if (m_CurrentSkill.m_FireEffect)
         {
-            m_fireSword.Play();
+            m_fireSwordParticle.gameObject.SetActive(true);
         }
         PlayStateAnimator(m_CurrentSkill);
     }
@@ -51,7 +51,7 @@ public class BattlePlayerController : BattleStatusControllerBase
 
         if (m_CurrentSkill.m_FireEffect)
         {
-            m_fireSword.Stop();
+            m_fireSwordParticle.gameObject.SetActive(false);
         }
     }
 

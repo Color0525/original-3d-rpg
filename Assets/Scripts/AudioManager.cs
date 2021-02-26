@@ -6,7 +6,7 @@ using UnityEngine;
 /// オーディオを管理
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
-public class AudioController : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioClip m_intro;
     [SerializeField] AudioClip m_loop;
@@ -19,6 +19,10 @@ public class AudioController : MonoBehaviour
         StartCoroutine(PlayBGM());
     }
 
+    /// <summary>
+    /// BGMをPlay。イントロがあるなら
+    /// </summary>
+    /// <returns></returns>
     IEnumerator PlayBGM()
     {
         if (m_intro)
