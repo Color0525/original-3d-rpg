@@ -22,6 +22,7 @@ public class MapManager : MonoBehaviour
     //UI
     [SerializeField] GameObject m_UI;
     [SerializeField] TextMeshProUGUI m_questTaskText;
+    [SerializeField] GameObject m_questClearText;
 
     void Start()
     {
@@ -93,15 +94,22 @@ public class MapManager : MonoBehaviour
         if (SceneController.m_Instance.m_CurrentQuest)
         {
             m_questTaskText.text = SceneController.m_Instance.m_CurrentQuest.QuestTaskText();
-            if (SceneController.m_Instance.m_CurrentQuest.m_Clear)
+
+            if (SceneController.m_Instance.m_CurrentQuest.m_ClearFlag)
             {
-                m_questTaskText.gameObject.GetComponent<Animator>().Play("Clear");
+                m_questClearText.SetActive(true);
+                if (!SceneController.m_Instance.m_CurrentQuest.m_Clear)
+                {
+                    SceneController.m_Instance.m_CurrentQuest.QuestClear();
+                    m_questClearText.GetComponent<Animator>().Play("Clear");
+                    m_questClearText.GetComponent<AudioSource>().Play();
+                }
             }
         }
         else
         {
             m_questTaskText.text = "クエストなし";
-            m_questTaskText.gameObject.GetComponent<Animator>().Play("None");
+            //m_questTaskText.gameObject.GetComponent<Animator>().Play("None");
         }
     }
 

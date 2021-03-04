@@ -12,6 +12,7 @@ public class QuestData : ScriptableObject
     [SerializeField] GameObject m_target = null;
     [SerializeField] int m_taskValue = 1;
     int m_taskCount = 0;
+    public bool m_ClearFlag { get; private set; } = false;
     public bool m_Clear { get; private set; } = false;
 
     /// <summary>
@@ -20,6 +21,7 @@ public class QuestData : ScriptableObject
     public void Reset()
     {
         m_taskCount = 0;
+        m_ClearFlag = false;
         m_Clear = false;
     }
 
@@ -51,6 +53,11 @@ public class QuestData : ScriptableObject
     public void AddQuestCount()
     {
         m_taskCount = Mathf.Min(m_taskValue, m_taskCount + 1);
-        m_Clear = m_taskCount >= m_taskValue ? true : false;
+        m_ClearFlag = m_taskCount >= m_taskValue ? true : false;
+    }
+
+    public void QuestClear()
+    {
+        m_Clear = true;
     }
 }

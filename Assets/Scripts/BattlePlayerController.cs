@@ -49,10 +49,18 @@ public class BattlePlayerController : BattleStatusControllerBase
         //Instantiate(m_CurrentSkill.m_HitEffectPrefab, target.transform.position, target.transform.rotation);
         //Attack(target, m_CurrentSkill.GetPowerRate(this));
 
+        //if (m_CurrentSkill.m_FireEffect)
+        //{
+        //    m_fireSwordParticle.gameObject.SetActive(false);
+        //}
+    }
+
+    public override void End()
+    {
         if (m_CurrentSkill.m_FireEffect)
         {
             m_fireSwordParticle.gameObject.SetActive(false);
         }
+        base.End();
     }
-
 }

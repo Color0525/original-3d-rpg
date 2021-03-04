@@ -84,11 +84,6 @@ public class BattleManager : MonoBehaviour
         foreach (var unit in m_playerPrefabs)
         {
             GameObject player = Instantiate(unit, m_playerBattlePosition);
-
-            ////statusIconをセット
-            //GameObject statusIcon = Instantiate(m_statusIconPrefab, m_statusPanel.transform);
-            //player.GetComponent<BattlePlayerController>().SetStatusIcon(statusIcon.GetComponent<StatusIconController>());
-
             m_playerUnits.Add(player.GetComponent<BattlePlayerController>());
             m_allUnits.Add(player.GetComponent<BattleStatusControllerBase>());
         }
@@ -115,7 +110,6 @@ public class BattleManager : MonoBehaviour
 
             case BattleState.StartTurn:
                 //現在ユニット行動開始
-                //StartCoroutine(TurnStart(m_allUnits[m_currentNum]));
                 m_allUnits[m_currentNum].GetComponent<BattleStatusControllerBase>().StartAction();
                 break;
 
@@ -127,12 +121,10 @@ public class BattleManager : MonoBehaviour
                 //戦闘終了したときResultTimelineを再生しAfterBattleへ
                 if (!m_inBattle)
                 {
-                    //＜playerステータス引き継ぎ
-
                     if (m_won)
                     {
                         //クエストのタスクチェック
-                        if (SceneController.m_Instance.m_CurrentQuest)
+                        if (SceneController.m_Instance.m_CurrentQuest && !SceneController.m_Instance.m_CurrentQuest.m_Clear)
                         {
                             foreach (var enemyObj in m_enemyPrefabs)
                             {
@@ -168,7 +160,6 @@ public class BattleManager : MonoBehaviour
                 if (Input.anyKeyDown)
                 {
                     SceneController.m_Instance.CallLoadMapScene(!m_won);
-                    //m_resultCutScene.gameObject.SetActive(false);
                 }
                 break;
 
@@ -176,30 +167,6 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-
-    //IEnumerator TurnStart(GameObject actionUnits)
-    //{
-    //    yield return null;//StartCoroutine(SlideEffect());
-    //    actionUnits.GetComponent<BattleStatusControllerBase>().StartAction();
-    //}
-
-    //IEnumerator SlideEffectAndSetState(BattleState nextState)
-    //{
-    //    //m_slideEffectPanel.SetActive(true);
-    //    //Animator anim = m_slideEffectPanel.GetComponent<Animator>();
-    //    //while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
-    //    //{
-    //    //    yield return new WaitForEndOfFrame();
-    //    //}
-    //    //m_slideEffectPanel.SetActive(false);
-    //    yield return null;
-    //    m_battleState = nextState;
-    //}
-
-    //public void UpdateState(BattleState state)
-    //{
-    //    m_battleState = state;
-    //}
 
     /// <summary>
     /// 戦闘開始演出
@@ -269,33 +236,6 @@ public class BattleManager : MonoBehaviour
         }
         m_commandWindow.SetActive(false);
     }
-
-    ///// <summary>
-    ///// 死亡ユニットを現在戦闘ユニットリストから消し、どちらかの陣営が全滅したならバトル終了状態に
-    ///// </summary>
-    ///// <param name="deadUnit"></param>
-    //public void DeleteUnitsList(BattleStatusControllerBase deadUnit)
-    //{
-    //    m_allUnits.Remove(deadUnit);
-    //    if (deadUnit.gameObject.GetComponent<BattleEnemyController>())
-    //    {
-    //        m_enemyUnits.Remove(deadUnit.gameObject.GetComponent<BattleEnemyController>());
-    //        if (m_enemyUnits.Count == 0)
-    //        {
-    //            m_inBattle = false;
-    //            m_won = true;
-    //        }
-    //    }
-    //    else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
-    //    {
-    //        m_playerUnits.Remove(deadUnit.gameObject.GetComponent<BattlePlayerController>());
-    //        if (m_playerUnits.Count == 0)
-    //        {
-    //            m_inBattle = false;
-    //            m_won = false;
-    //        }
-    //    }
-    //}
 
     /// <summary>
     /// 死亡エネミーを現在戦闘ユニットリストから消し、全滅したなら勝利でバトル終了

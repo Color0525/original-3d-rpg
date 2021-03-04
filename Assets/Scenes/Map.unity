@@ -4651,6 +4651,7 @@ GameObject:
   - component: {fileID: 452016605}
   - component: {fileID: 452016607}
   - component: {fileID: 452016606}
+  - component: {fileID: 452016609}
   - component: {fileID: 452016608}
   m_Layer: 5
   m_Name: Clear
@@ -4706,7 +4707,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 2
@@ -4785,7 +4786,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1e4a455571c694649b1f5ddaa7916127, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4870,6 +4871,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &452016609
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452016604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28d998aeadfd5594ca736aa88dd895ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &457368148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15258,6 +15278,7 @@ MonoBehaviour:
   m_mainVirtualCamera: {fileID: 1268291847}
   m_UI: {fileID: 1515815361}
   m_questTaskText: {fileID: 1666122812}
+  m_questClearText: {fileID: 452016604}
 --- !u!1 &1291687868
 GameObject:
   m_ObjectHideFlags: 0
@@ -18321,7 +18342,6 @@ GameObject:
   - component: {fileID: 1666122811}
   - component: {fileID: 1666122813}
   - component: {fileID: 1666122812}
-  - component: {fileID: 1666122814}
   m_Layer: 5
   m_Name: TaskText
   m_TagString: Untagged
@@ -18445,25 +18465,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666122810}
   m_CullTransparentMesh: 0
---- !u!95 &1666122814
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1666122810}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 28d998aeadfd5594ca736aa88dd895ae, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1675883810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1553163231892768, guid: 0fd5be61d8c00de419d45d6bf745a69c,

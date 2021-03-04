@@ -91,7 +91,7 @@ public class BattleStatusControllerBase : MonoBehaviour
             Attack(target, m_CurrentSkill.GetPowerRate(this));
         }
     }
-    void End()//Attackアニメイベント 
+    public virtual void End()//Attackアニメイベント 
     {
         EndAction();
     }
