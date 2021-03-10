@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -274,6 +275,7 @@ public class BattleManager : MonoBehaviour
     {
         GameObject go = Instantiate(m_ActionTextPrefab, GameObject.FindWithTag("MainCanvas").transform);
         go.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
+        DOTween.To(() => go.transform.localPosition - new Vector3(500, 0, 0), x => go.transform.localPosition = x, go.transform.localPosition, 0.05f);
         Destroy(go, 1f);
     }
 

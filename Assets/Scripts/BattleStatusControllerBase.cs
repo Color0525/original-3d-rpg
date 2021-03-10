@@ -47,7 +47,7 @@ public class BattleStatusControllerBase : MonoBehaviour
     {
         m_battleManager = FindObjectOfType<BattleManager>();
         m_anim = GetComponent<Animator>();
-        m_statusIcon.SetupStatus(/*m_name,*/ m_maxHP, m_currentHP, m_maxSP, m_currentSP);
+        m_statusIcon.SetupStatus(this);
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class BattleStatusControllerBase : MonoBehaviour
         if (m_currentHP == 0)
         {
             m_anim.SetBool("Dead", true);
-            Death(this);
+            Death();
         }
         else
         {
@@ -130,18 +130,22 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// 死亡する
     /// </summary>
     /// <param name="deadUnit"></param>
-    public virtual void Death(BattleStatusControllerBase deadUnit)
+    public virtual void Death()
     {
-        if (deadUnit.gameObject.GetComponent<BattleEnemyController>())
+        if (this.gameObject.GetComponent<BattleEnemyController>())
         {
-            m_battleManager.DeleteEnemyList(deadUnit.gameObject.GetComponent<BattleEnemyController>());
+            m_battleManager.DeleteEnemyList(this.gameObject.GetComponent<BattleEnemyController>());
         }
-        else if (deadUnit.gameObject.GetComponent<BattlePlayerController>())
+        else if (this.gameObject.GetComponent<BattlePlayerController>())
         {
-            m_battleManager.DeletePlayerList(deadUnit.gameObject.GetComponent<BattlePlayerController>());
+            m_battleManager.DeletePlayerList(this.gameObject.GetComponent<BattlePlayerController>());
         }
     }
 
+    /// <summary>
+    /// SPを消費する
+    /// </summary>
+    /// <param name="cost"></param>
     public void UseSP(int cost)
     {
         UpdateSP(-cost);
@@ -153,8 +157,12 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// <param name="value"></param>
     void UpdateHP(int value = 0)
     {
+        int current = m_currentHP;
         m_currentHP = Mathf.Clamp(m_currentHP + value, 0, m_maxHP);
-        m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
+        if (current != m_currentHP)
+        {
+            m_statusIcon.UpdateHPBar(m_maxHP, m_currentHP);
+        }
     }
 
     /// <summary>
@@ -163,8 +171,12 @@ public class BattleStatusControllerBase : MonoBehaviour
     /// <param name="value"></param>
     void UpdateSP(int value = 0)
     {
+        int current = m_currentSP;
         m_currentSP = Mathf.Clamp(m_currentSP + value, 0, m_maxSP);
-        m_statusIcon.UpdateSPBar(m_maxSP, m_currentSP);
+        if (current != m_currentSP)
+        {
+            m_statusIcon.UpdateSPBar(m_maxSP, m_currentSP);
+        }
     }
 
     /// <summary>

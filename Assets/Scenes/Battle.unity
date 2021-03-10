@@ -17844,7 +17844,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Left Click : Action Select'
+  m_text: "\u30DE\u30A6\u30B9 : \u884C\u52D5\u9078\u629E\u3000  \u5DE6\u30AF\u30EA\u30C3\u30AF
+    : \u6C7A\u5B9A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad128ade527d75b4980ff3b32f35c9eb, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a002d25b554972a4b882b44b4a2cfe25, type: 2}

@@ -1,19 +1,21 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ステータスアイコンを操作
+/// Playerのステータスアイコンを操作
 /// </summary>
 public class StatusIconController : MonoBehaviour
 {
+    [SerializeField] bool m_noMoveEffect = true;
+    float m_effectTime = 0.2f;
     [SerializeField] Slider m_HPBar;
     [SerializeField] TextMeshProUGUI m_HPValue = null;
     [SerializeField] Slider m_SPBar = null;
     [SerializeField] TextMeshProUGUI m_SPValue = null;
-    //[SerializeField] TextMeshProUGUI m_name;
 
     /// <summary>
     /// ステータスアイコンのセットアップ
@@ -23,12 +25,10 @@ public class StatusIconController : MonoBehaviour
     /// <param name="currentHP"></param>
     /// <param name="maxSP"></param>
     /// <param name="currentSP"></param>
-    public void SetupStatus(int maxHP, int currentHP, int maxSP, int currentSP /*, string name*/ )
+    public void SetupStatus(BattleStatusControllerBase status)
     {
-        UpdateHPBar(maxHP, currentHP);    
-        UpdateSPBar(maxSP, currentSP);
-        
-        //m_name.text = name;
+        UpdateHPBar(status.m_MaxHP, status.m_CurrentHP);
+        UpdateSPBar(status.m_MaxSP, status.m_CurrentSP);
     }
 
     /// <summary>
@@ -38,10 +38,27 @@ public class StatusIconController : MonoBehaviour
     /// <param name="currentHP"></param>
     public void UpdateHPBar(int maxHP, int currentHP)
     {
-        m_HPBar.value = (float)currentHP / (float)maxHP;
+        if (m_noMoveEffect)
+        {
+            m_HPBar.DOValue((float)currentHP / (float)maxHP, m_effectTime);
+        }
+        else
+        {
+            m_HPBar.transform.DOScale(new Vector3(1.5f, 0.9f, 1), 0.1f);
+            m_HPBar.DOValue((float)currentHP / (float)maxHP, m_effectTime);
+            m_HPBar.transform.DOScale(1f, 0.1f).SetDelay(m_effectTime);
+        }
+        
         if (m_HPValue)
         {
-            m_HPValue.text = currentHP.ToString();
+            if (m_noMoveEffect)
+            {
+                m_HPValue.text = currentHP.ToString();
+            }
+            else
+            {
+                DOTween.To(() => int.Parse(m_HPValue.text), x => m_HPValue.text = x.ToString(), currentHP, m_effectTime);
+            }
         }
     }
 
@@ -54,11 +71,28 @@ public class StatusIconController : MonoBehaviour
     {
         if (m_SPBar)
         {
-            m_SPBar.value = (float)currentSP / (float)maxSP;
+            if (m_noMoveEffect)
+            {
+                m_SPBar.DOValue((float)currentSP / (float)maxSP, m_effectTime);
+            }
+            else
+            {
+                m_SPBar.transform.DOScale(new Vector3(1.5f, 0.9f, 1), 0.1f);
+                m_SPBar.DOValue((float)currentSP / (float)maxSP, m_effectTime);
+                m_SPBar.transform.DOScale(1f, 0.1f).SetDelay(m_effectTime);
+            }
+            
         }
         if (m_SPValue)
         {
-            m_SPValue.text = currentSP.ToString();
+            if (m_noMoveEffect)
+            {
+                m_SPValue.text = currentSP.ToString();
+            }
+            else
+            {
+                DOTween.To(() => int.Parse(m_SPValue.text), x => m_SPValue.text = x.ToString(), currentSP, m_effectTime);
+            }
         }
     }
 }
