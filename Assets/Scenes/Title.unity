@@ -7490,7 +7490,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076368375}
-  m_LocalRotation: {x: 0.027949808, y: 0.9303711, z: -0.07258032, w: 0.3582745}
+  m_LocalRotation: {x: 0.027949782, y: 0.93037105, z: -0.07258027, w: 0.3582745}
   m_LocalPosition: {x: -1.41, y: -1.8, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11258,7 +11258,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550272206}
-  m_LocalRotation: {x: 0.027949808, y: 0.9303711, z: -0.07258032, w: 0.3582745}
+  m_LocalRotation: {x: 0.027949782, y: 0.93037105, z: -0.07258027, w: 0.3582745}
   m_LocalPosition: {x: -1.41, y: -1.8, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -13869,6 +13869,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1902593728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913456881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913456883}
+  - component: {fileID: 1913456882}
+  m_Layer: 0
+  m_Name: TitleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1913456882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913456881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d26b7a0894d9d418700575e6d98767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1913456883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913456881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1917019266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15403,8 +15446,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1579724103}
-        m_MethodName: CallNewGameLoadMapScene
+      - m_Target: {fileID: 1913456882}
+        m_MethodName: ButtonCallNewGameLoadMapScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

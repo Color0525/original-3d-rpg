@@ -235,7 +235,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7b3d4597b74b3241b83a4876067f92e, type: 2}
   m_statusIcon: {fileID: 1187049678646948430}
   m_hitParticlePosition: {fileID: 6274321756026501440}
-  m_damageTextPosition: {fileID: 1740394305173110424}
+  m_damageTextPosition: {fileID: 6274321756026501440}
   m_damageTextPrefab: {fileID: 8046955857244188895, guid: 5a36d68f2439e044b90c0a341c5e5732,
     type: 3}
   m_DeadParticlePrefab: {fileID: 8030796182266108582, guid: f8fafefb549d9424d94051995a68d80b,

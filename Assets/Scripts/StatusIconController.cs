@@ -44,7 +44,7 @@ public class StatusIconController : MonoBehaviour
         }
         else
         {
-            m_HPBar.transform.DOScale(new Vector3(1.5f, 0.9f, 1), 0.1f);
+            m_HPBar.transform.DOScale(new Vector3(1.5f, 0.9f, 1), 0.05f);
             m_HPBar.DOValue((float)currentHP / (float)maxHP, m_effectTime);
             m_HPBar.transform.DOScale(1f, 0.1f).SetDelay(m_effectTime);
         }
@@ -77,7 +77,7 @@ public class StatusIconController : MonoBehaviour
             }
             else
             {
-                m_SPBar.transform.DOScale(new Vector3(1.5f, 0.9f, 1), 0.1f);
+                m_SPBar.transform.DOScale(new Vector3(1.5f, 0.9f, 1), 0.05f);
                 m_SPBar.DOValue((float)currentSP / (float)maxSP, m_effectTime);
                 m_SPBar.transform.DOScale(1f, 0.1f).SetDelay(m_effectTime);
             }

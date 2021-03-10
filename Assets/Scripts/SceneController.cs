@@ -95,9 +95,7 @@ public class SceneController : MonoBehaviour
     IEnumerator LoadTitleScene()
     {
         yield return StartCoroutine(FadeOut());
-        yield return StartCoroutine(LoadSceneCoroutine("Title"));
-        yield return new WaitForEndOfFrame();
-        StartCoroutine(FadeIn());
+        StartCoroutine(LoadSceneCoroutine("Title"));
     }
 
     /// <summary>
