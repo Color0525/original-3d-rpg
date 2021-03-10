@@ -52,19 +52,27 @@ public class SceneController : MonoBehaviour
             //初期クエストをセット
             if (m_initialQuest)
             {
-                SetQuest(m_initialQuest);
+                SetInirialQuest();
             }
         }
     }
 
     /// <summary>
+    /// ポジションをリセット
+    /// </summary>
+    public void ResetPosition()
+    {
+        m_PlayerMapPosition = Vector3.zero;
+        m_PlayerMapRotation = Quaternion.identity;
+    }
+
+    /// <summary>
     /// クエストをセット
     /// </summary>
-    /// <param name="quest"></param>
-    void SetQuest(QuestData quest)
+    public void SetInirialQuest()
     {
-        quest.Reset();
-        m_CurrentQuest = quest;
+        m_initialQuest.Reset();
+        m_CurrentQuest = m_initialQuest;
     }
 
     /// <summary>

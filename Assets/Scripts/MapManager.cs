@@ -38,6 +38,8 @@ public class MapManager : MonoBehaviour
         if (SceneController.m_Instance.m_NewGame)
         {
             SceneController.m_Instance.SetNewGameFalse();
+            SceneController.m_Instance.SetInirialQuest();
+            SceneController.m_Instance.ResetPosition();
             StartCoroutine(PlayOpeningCutScene());
         }
         else if (SceneController.m_Instance.m_GameOver)
