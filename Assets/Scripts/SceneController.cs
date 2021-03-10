@@ -84,6 +84,23 @@ public class SceneController : MonoBehaviour
     }
 
     /// <summary>
+    /// タイトルシーンを読み込む
+    /// </summary>
+    /// <returns></returns>
+    public void CallLoadTitleScene()
+    {
+        StartCoroutine(LoadTitleScene());
+    }
+
+    IEnumerator LoadTitleScene()
+    {
+        yield return StartCoroutine(FadeOut());
+        yield return StartCoroutine(LoadSceneCoroutine("Title"));
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(FadeIn());
+    }
+
+    /// <summary>
     /// ゲームオーバーか判定し、マップシーン読み込みを呼ぶ
     /// </summary>
     public void CallLoadMapScene(bool gameOverFlag = false)

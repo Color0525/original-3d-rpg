@@ -50,6 +50,14 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetButtonUp("Cancel"))
+        {
+            SceneController.m_Instance.CallLoadTitleScene();
+        }    
+    }
+
     /// <summary>
     /// OPを再生し、ActivationPlayer()
     /// </summary>
