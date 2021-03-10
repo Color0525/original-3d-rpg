@@ -6,6 +6,8 @@ public class TitleManager : MonoBehaviour
 {
     void Start()
     {
+        Cursor.visible = true;
+
         StartCoroutine(SceneController.m_Instance.FadeIn());
     }
 
